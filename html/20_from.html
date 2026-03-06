@@ -7,5 +7,26 @@
 </head>
 <body>
     <h1>회원가입</h1>
+    <form action="#" method="GET"> <!-- # = 백엔드 서버 주소 / method : GET/POST -->
+
+         <!-- GET : 서버에 데이터 전송 방식으로 URL을 사용함, Query String(쿼리스트링) 네트웍 패킷의 헤더에 함께 전송 -->
+    <!-- POST :  서버에 데이터 전송 시 네트웍 패킷의 바다에 함께 전송 -->
+
+        <ul>
+            <li>
+                <label for="">이름</label>
+                <input type="text" name="name">
+            </li>
+            <li>
+                <label for="">주소</label>
+                <input type="text" name="address">
+            </li>
+            <li>
+                <button type="submit">전송</button> <!-- default : submit -->
+                <button type="button">전송 ( 이벤트 x )</button> 
+                <button type="reset">다시쓰기</button> 
+            </li>
+        </ul>
+    </form>
 </body>
 </html>
