@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web Form</title>
+    <meta name="description" content="웹 개발 교육 상담 문의">
     <style>
         ul{list-style: none;}
     </style>
@@ -22,46 +23,46 @@
                     <ul>
                         <li>
                             <label for="name">이름 * </label>
-                            <input type="text" name="name" placeholder="이름을 입력하세요">
+                            <input type="text" name="name" placeholder="이름을 입력하세요" id="name">
                         </li>
                         <p>실명을 입력해주세요.</p>
                     </ul>
                     <ul>
                         <li>
                             <label for="email">이메일 * </label>
-                            <input type="text" name="email" placeholder="jinjinx28@gmail.com">
+                            <input type="text" name="email" placeholder="jinjinx28@gmail.com" id="email">
                         </li>
                         <p>답변 받을 이메일 주소를 입력해주세요.</p>
                     </ul>
                     <ul>
                         <li>
                             <label for="number">연락처</label>
-                            <input type="text" name="number" placeholder="010-0000-0000">
+                            <input type="text" name="number" placeholder="010-0000-0000" id="number">
                         </li>
                     </ul>
                     <ul>
                         <li>
                             <label for="ho">관심 과정 * </label>
                             <select name="ho">
-                                <option value="">선택하세요</option>
-                                <option value="">HTML</option>
-                                <option value="">CSS</option>
-                                <option value="">JavaScript</option>
-                                <option value="">React</option>
+                                <option value="choose">선택하세요</option>
+                                <option value="html">HTML</option>
+                                <option value="css">CSS</option>
+                                <option value="javascript">JavaScript</option>
+                                <option value="react">React</option>
                             </select>
                         </li>
                     </ul>
                     <ul>    
                         <li>
-                            <label for="">문의 내용 *</label>
-                            <textarea name="text" cols="50" rows="3" placeholder="궁금한 내용을 자세히 입력해 주세요."></textarea>
+                            <label for="text">문의 내용 *</label>
+                            <textarea name="text" cols="50" rows="3" placeholder="궁금한 내용을 자세히 입력해 주세요." id="text"></textarea>
                         </li>
                         <p>예 : 수업 일정, 수강 대상, 비용, 프로젝트 중심 수업 여부 등</p>
                     </ul>
                     <ul>
                         <li>
-                            <label for=""></label>
-                            <input type="checkbox" name="pri" value="개인정보수집">
+                            <label for="pri"></label>
+                            <input type="checkbox" name="pri" value="개인정보수집" id="pri">
                             <span>개인 정보 수집 및 이용에 동의합니다. *</span>
                         </li>
                     </ul>
