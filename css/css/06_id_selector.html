@@ -6,14 +6,30 @@
     <title>ID Selector</title>
     <meta name="description" content="ID Selector">
     <style>
-        h1{
-            color: aquamarine;
+        * {margin: 0;}
+        /* id 선택자는 중복 선택해서 사용하지 않는 것을 추천함 */
+        #h1{
+            /* 글자색 : azure, 가로 : 300px, 높이 : 400px, 배경색 : hsl(122, 81%, 64%) */
+            color: azure;
+            background-color: hsl(122, 81%, 64%);
+            width: 300px;
+            height: 400px;
+        }
+        #h2{
+            /* 글자색 : azure, 배경색 : aquamarine */
+            color: azure;
+            background-color: aquamarine;
+        }
+        #h3{
+            /* 글자색 : azure, 배경색 : aquamarine */
+            color: rgb(162, 129, 255);
+            background-color: aquamarine;
         }
     </style>
 </head>
 <body>
-    <h1 id="1">ID Selector #1</h1>
-    <h1 id="2">ID Selector #2</h1>
-    <h1 id="3">ID Selector #3</h1>
+    <h1 id="h1">ID Selector #1</h1>
+    <h1 id="h2">ID Selector #2</h1>
+    <h1 id="h3">ID Selector #3</h1>
 </body>
 </html>
