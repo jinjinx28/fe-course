@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selector Priority</title>
+    <meta name="description" content="Selector Priority">
+    <style>
+        /* < 높은 순서 >
+            all()* > element(tag) > class, pseudo, attribute > id > inline-style > !important
+         */
+         * {background-color: rgb(231, 251, 217);}
+         h1 {background-color: aquamarine;}
+         div {background-color: rgb(144, 144, 255);}
+         p {background-color: rgb(177, 255, 255);}
+
+        #p1 {
+            color: rgb(113, 113, 113);
+        }
+        .p2 {
+            color: blueviolet !important;
+        }
+    </style>
+</head>
+<body>
+    <h1>Selector Priority</h1>
+    <div>
+        <p id="p1" class="p2" style="color: aqua;">Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>
+            Magni cumque dicta sapiente maxime nemo fugiat. Repudiandae, ab quam! Labore, <br>
+            dignissimos expedita sint magni commodi laborum facere doloribus eius accusantium at?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>
+            Magni cumque dicta sapiente maxime nemo fugiat. Repudiandae, ab quam! Labore, <br>
+            dignissimos expedita sint magni commodi laborum facere doloribus eius accusantium at?</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br>
+            Magni cumque dicta sapiente maxime nemo fugiat. Repudiandae, ab quam! Labore, <br>
+            dignissimos expedita sint magni commodi laborum facere doloribus eius accusantium at?</p>
+    </div>
+</body>
+</html>
