@@ -8,6 +8,49 @@
     <style>
         p { background-color: aquamarine; }
         span { background-color: rgb(204, 164, 242); }
+        div { border: 1px solid rgb(20, 26, 66); }
+
+        .b-left { 
+            text-align: left; 
+            word-spacing: 50px; 
+            line-height: 50px; 
+            text-indent: 5dvh;  /* 들여쓰기 */
+            margin-left: 50px;
+        }
+        .b-right { text-align: right; }
+        .b-center { text-align: center; }
+
+        .i-left { 
+            border: 1px solid rgb(66, 66, 140);
+            text-align: left; 
+            word-spacing: 50px; 
+            line-height: 100px;
+            text-indent: 50px; /* inline-level에서는 적용 안됨 ❌ */
+        }
+        .i-right { text-align: right; }
+        .i-center { text-align: center; }
+
+        .d1 { text-align: left; }
+        .d2 { text-align: right; }
+        .d3 { text-align: center; }
+
+        img {
+            width: 200px;
+            height: 200px;
+        }
+        .img-block {
+            text-align: center;
+            word-spacing: 50px;
+         }
+         .b-justify{
+            width: 300px;
+            background-color: bisque;
+            text-align: justify;
+            /* 
+            text-transform: uppercase; - 대문자 변형
+            text-transform: capitalize; - 대소문자 변형
+            */
+         }
     </style>
 </head>
 <body>
@@ -16,10 +59,33 @@
     <p class="b-left">text align :: left</p>
     <p class="b-right">text align :: right</p>
     <p class="b-center">text align :: center</p>
+    <p class="b-justify">Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+        Obcaecati sed nesciunt id veniam ad dolores accusantium rem ipsum reiciendis vitae fuga expedita eius quas, 
+        eaque eos fugit tempora modi assumenda?
+    </p>
 
     <h3>inline-level</h3>
+    <div class="d1">
+        <span class="i-left">text align :: left</span>
+        <button>클릭하세요</button>
+        <a href="#">네이버</a>
+    </div>
+    <div class="d2"><span class="i-right">text align :: right</span></div>
+    <div class="d3"><span class="i-center">text align :: center</span></div>
+    <hr>
+    
     <span class="i-left">text align :: left</span>
     <span class="i-right">text align :: right</span>
     <span class="i-center">text align :: center</span>
+
+    <h3>inline-block-level</h3>
+    <div class="img-block">
+        <img src="../img/tt.png" alt="tt">
+        <img src="../img/tt.png" alt="tt">
+        <img src="../img/tt.png" alt="tt">
+        <img src="../img/tt.png" alt="tt">
+        <img src="../img/tt.png" alt="tt">
+    </div>
+
 </body>
 </html>
