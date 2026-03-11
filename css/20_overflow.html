@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overflow Style</title>
+    <style>
+        p{ margin: 30px;}
+        /* p1 : 가로 200, 세로 200, 배경색*/
+        .p1{
+            width: 200px; height: 200px; background-color: aquamarine;
+            overflow-x: scroll;
+        }
+        /* p2 : 가로 300, 세로 200, 배경색*/
+        .p2{
+            width: 300px; height: 500px; background-color: pink;
+            overflow-y: hidden;
+        }
+        /* p3 : 가로 400, 세로 100, 배경색*/
+        .p3{
+            width: 400px; height: 100px; background-color: rgb(216, 216, 139);
+            overflow-y: hidden;
+        }
+        img{
+            width: 600px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Overflow Style</h1>
+    <p class="p1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, nostrum corrupti consectetur autem quia dolorem aperiam sit incidunt velit sapiente temporibus. Nostrum error explicabo dolor, nisi laboriosam ipsam doloremque autem?</p>
+    <div>
+        <p class="p2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, nostrum corrupti consectetur autem quia dolorem aperiam sit incidunt velit sapiente temporibus. Nostrum error explicabo dolor, nisi laboriosam ipsam doloremque autem?
+        <img src="../img/k.jpg" alt="kk">
+    </div>
+    </p>
+    <p class="p3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, nostrum corrupti consectetur autem quia dolorem aperiam sit incidunt velit sapiente temporibus. Nostrum error explicabo dolor, nisi laboriosam ipsam doloremque autem?</p>
+</body>
+</html>
