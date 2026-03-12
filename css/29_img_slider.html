@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slider</title>
+    <style>
+        .slider-wrapper{
+            box-sizing: border-box;
+            position: relative;
+            width: 1200px;
+            height: 400px;
+            margin: auto;
+            border: 1px solid blue;
+            text-align: center;
+        }
+        .slider-wrapper img{
+            width: 800px;
+            height: 400px;
+        }
+        button{
+            position: absolute;
+            top: 50%;
+            padding: 10px 20px;
+            background-color: white;
+            color: black;
+            border: none;
+            font-size: 2rem;
+        }
+        .btn-prev{left: 50px;}
+        .btn-next{right: 50px;}
+        button:hover{
+            color: aliceblue;
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+<body>
+    <h1>Image Slider</h1>
+    <div class="slider-wrapper">
+        <img src="../img/k.jpg" alt="케이온">
+        <button class="btn-prev">&lt</button>
+        <button class="btn-next">&gt</button>
+    </div>
+</body>
+</html>
