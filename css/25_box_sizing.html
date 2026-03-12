@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Box-sizing</title>
+    <style>
+        /* div{
+            width: 300px;
+            height: 200px;
+            margin: 20px;
+            background-color: pink;
+        } */
+        .content-box{
+            box-sizing: content-box; /* box-sizing default */
+            border: 10px solid blue;
+            padding: 0 10px;
+            margin: 20px;
+        }
+        .border-box{
+            box-sizing: border-box;
+            border: 10px solid blue;
+            padding: 0 10px;
+            margin: 20px;
+        }
+        .d1{
+            width: 800px;
+            height: 200px;
+            margin-top: 0px;
+            background-color: antiquewhite;
+            display: flex;
+            border: 1px solid lightcoral;
+        }
+        p{
+            box-sizing: border-box;
+            width: 400px;
+            height: 200px;
+            background-color: aquamarine;
+            border: 10px solid gray;
+        }
+        .d0{
+            width: 400px;
+            height: 300px;
+            border: 1px solid violet;
+            /* padding: 20px; */
+        }
+        .d0 p {
+            border: 10px solid black;
+            background-color: #fff;
+            border: 0;
+            padding: 3cqb;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Box-sizing</h1>
+    <div class="border-box">
+        <ul>
+            <li>Box-sizing : border-box</li>
+            <li>width : 300px</li>
+            <li>border : 10px</li>
+            <li>padding : 0 10px</li>
+            <li>padding-width = 300px</li>
+        </ul>
+    </div>
+    <div class="content-box">
+        <ul>
+            <li>Box-sizing : content-box</li>
+            <li>width : 300</li>
+            <li>border : 10px</li>
+            <li>padding : 0 20px</li>
+            <li>total width = 360px</li>
+        </ul>
+    </div>
+    <div class="d0">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+        Aliquam nulla quia maxime voluptas similique ea laborum incidunt perspiciatis esse soluta porro, 
+        tempore, officiis, assumenda aut sunt modi mollitia perferendis! Nobis?</p>
+    </div>
+    <div class="d1">
+        <p class="p1">Lorem</p>
+        <p class="p2">Lorem</p>
+    </div>
+</body>
+</html>
