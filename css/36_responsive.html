@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Style</title>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        .header-toggle{
+            display: none;
+            color: aquamarine;
+            font-size: 1.5rem;
+        }
+        .header-menu{
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            /* border: 1px solid blue; */
+            list-style-type: none;
+            padding: 0; margin: 0;
+            overflow: hidden;
+        }
+        .header-menu a{
+            padding: 1rem 1.5rem;
+            background-color: rgb(210, 162, 255);
+        }
+        @media screen and (max-width : 600px) {     
+            .wrapper{
+                background-color: aquamarine;
+            }
+            .wrapper header{
+                background-color: pink;
+                color: #fff;
+                font-weight: 2rem;
+            }
+            .header-menu{display: none;}
+            .header-toggle{
+                display: block;
+            }
+        }
+        /* media query :: 중간에 처리되는 사이즈는 min-width로 정의 / 1001px 이상일때 실행되는 CSS */
+        @media screen and (min-width : 1001px) {    
+            .wrapper{
+                background-color: aquamarine;
+            }
+            .wrapper main{
+                background-color: rgb(172, 255, 202);
+                color: #fff;
+                font-weight: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Responsive Style :: 반응형</h1>
+    <div class="wrapper">
+        <header>
+            <nav>
+                <ul class="header-menu">
+                    <li><a href="#">로그인</a></li>
+                    <li><a href="#">회원가입</a></li>
+                    <li><a href="#">공지사항</a></li>
+                    <li><a href="#">게시판</a></li>
+                    <li><a href="#">QnA</a></li>
+                </ul>
+                <button class="header-toggle"><i class="fa-solid fa-bars"></i></button>
+            </nav>
+        </header>
+        <main>Main</main>
+        <footer>Footer</footer>
+    </div>
+</body>
+</html>
