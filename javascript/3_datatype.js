@@ -72,4 +72,5 @@ console.log(oo, typeof oo);
 
 console.log('==> 데이터 타입 확인 및 비교');
 console.log(typeof xx == typeof xxx);       // == : 값 비교
-console.log(typeof xx == typeof yy);       
+console.log(typeof xx == typeof yy);        // == : 값 비교, typeof 포함시 데이터타입 비교
+console.log(xx === yy);                     // === : 값 비교 + 데이터타입 비교      
