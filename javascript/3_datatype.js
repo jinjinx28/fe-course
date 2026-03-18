@@ -58,3 +58,18 @@ console.log(jsonObj);
 //8. 초기화 값, 객체
 let x = undefined; //Primitive 초기화
 let xy = null;     //Reference 초기화
+
+//9. typeof : 데이터 비교
+let xx = 10;
+let xxx = 10;
+let yy = '10';
+let oo = {'name' : 'object'}
+
+console.log('==> 데이터 타입 확인 : typeof');
+console.log(xx, typeof xx);
+console.log(yy, typeof yy);
+console.log(oo, typeof oo);
+
+console.log('==> 데이터 타입 확인 및 비교');
+console.log(typeof xx == typeof xxx);       // == : 값 비교
+console.log(typeof xx == typeof yy);       
