@@ -1,0 +1,60 @@
+/*
+  Primitive DataType  ( 원시형 데이터 타입 )
+  - 정수형(Integer) : 100, 200 ..(64bit : -2**31 ~ 2**31-1)
+  - 실수형(Float, Double) : 3.14 ..
+  - 문자형(Character(= String) : '', "") : '진진', "뇽" ..
+  - 불린형(Boolean) : true(1), false(0)
+
+  🌐 정수형 범위(64bit : -2**31 ~ 2**31-1)안에 정수 선언시 Stack Frame에 저장됨
+  🌐 정수형 범위(64bit : -2**31 ~ 2**31-1)를 넘어서면 Heap에 저장됨
+  🌐 실수형, 문자형은 Heap에 저장 후 포인터(변수)는 Stack Frame에 저장
+  
+
+  Reference DataType ( 참조형 데이터 타입 )
+  - 객체형(Object, {}), 배열(Array, []), 클래스(Class), JSON(객체형, 배열 모두 포함)
+  🌐 참조형 데이터 타입은 무조건 Heap에 저장
+ */
+
+//   let obj = {'name':'jinjin', 'age': 23}
+// console.log(2**31-1);
+
+//1. 정수형
+let inumber1 = 2**31-1;
+let inumber2 = 2**31;
+console.log(inumber1, inumber2);
+
+//2. 실수형
+let fnumber = 1234.12345678;
+console.log(fnumber);
+
+//3. 문자형
+let name = 'jinjin';
+let cname = 'jinjin';
+console.log(name);
+console.log(cname);
+
+//4. 불린형
+let flag = true;
+console.log(flag);
+
+//5.배열
+let nameArray =['진진', '뇽', '누리'];
+console.log(nameArray);
+
+//6. 객체(Object)
+let obj = {
+    "name" : '진진',
+    "age" : 30
+}
+console.log(obj);
+
+//7. JSON
+let jsonObj = {
+    "name" : "진진",
+    "score" : [100, 90, 90]
+};
+console.log(jsonObj);
+
+//8. 초기화 값, 객체
+let x = undefined; //Primitive 초기화
+let xy = null;     //Reference 초기화
