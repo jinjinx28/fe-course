@@ -13,14 +13,21 @@ let b = 7;
 console.log('--- && : AND ---');
 console.log((a < b) && (a > b)); // true && false
 console.log((a < b) && (a == b)); // true && false
-console.log((a == b) && (a < b)); // false && true
+console.log((a == b) && (a < b)); // false && true  🌐shorttcut
 console.log((a < b) && (a !== b)); // true && true
 
 console.log('--- || : OR ---');
-console.log((a == b) || (a > b)); // false && false
-console.log((a < b) || (a == b)); // true && false
-console.log((a == b) || (a < b)); // false && true
-console.log((a < b) || (a !== b)); // true && true
+console.log((a == b) || (a > b)); // false && false = false
+console.log((a < b) || (a == b)); // true && false = true   🌐shorttcut
+console.log((a == b) || (a < b)); // false && true = true
+console.log((a < b) || (a !== b)); // true && true = true
+
+// 🌐 로그인 처리 시 (패스워드 && 아이디) 비교 로직을 구현
+let userId = 'test';
+let userPass = '1234';
+if (userId == 'test' && userPass == '1234'){
+    // 결과
+}
 
 
 
