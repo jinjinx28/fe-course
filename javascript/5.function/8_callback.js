@@ -3,7 +3,33 @@
 */
 
 const job = (a, b, callback) => {
-    console.log(a, b);
+    // console.log(a, b);
+    callback(a, b);
 }
 
-job(1, 2);
+const print = (a, b) => 
+    {console.log(a, b);
+}
+
+const printSum = (a, b) => 
+    {console.log(a + b);
+}
+
+// job(1, 2, (a, b) => {console.log(a, b);});
+// job(10, 20, (a, b) => {console.log(a + b)}); 
+
+job(1, 2, print);
+job(10, 20, printSum);
+
+// 비동기식 처리 함수 : setTimeOut(funcRef, delay);
+// 내장함수, 전역함수
+console.clear();
+console.log('console에 로그 출력 #1!!');
+
+setTimeout(() => {
+    console.log('setTimeOut 실행 결과');
+    
+}, 1000); // 1초 후에 콜백함수를 실행
+
+console.log('console에 로그 출력 #2!!');
+
