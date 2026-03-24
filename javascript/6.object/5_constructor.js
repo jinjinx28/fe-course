@@ -18,8 +18,10 @@ function Fruit(name, color, emoji) {
 
     this.display = () => {
         console.log(this.name, this.color, this.emoji);
-        
     }
+    this.sum = () => {return this.kor + this.eng + this.math;}
+    this.avg = () => {return this.sum}
+
 }
 let apple = new Fruit('apple', 'green', '🍏');
 let lemon = new Fruit('lemon', 'yellow', '🍋');
@@ -42,7 +44,10 @@ function Score (name, kor, eng, math) {
     this.math = math;
     
     this.display = () => {
-        console.log(this.name, this.kor, this.eng, this.math);}
+        console.log(this.name, this.kor, this.eng, this.math);
+    }
+    this.sum = () => {return this.kor + this.eng + this.math;}
+    this.avg = () => {return parseInt(this.sum()/3)}
 }
 
 // 성적리스트 객체 생성 함수
@@ -66,6 +71,14 @@ nyong.display();
 nuri.display();
 yuriko.display();
 
-console.log(scoreList);
+// console.log(scoreList);
+
+console.clear();
+console.log(`${jinjin.name} 총점 / 평균 = ${jinjin.sum()}/${jinjin.avg()}`);
+console.log(`${smith.name} 총점 / 평균 = ${smith.sum()}/${smith.avg()}`);
+console.log(`${nyong.name} 총점 / 평균 = ${nyong.sum()}/${nyong.avg()}`);
+console.log(`${nuri.name} 총점 / 평균 = ${nuri.sum()}/${nuri.avg()}`);
+console.log(`${yuriko.name} 총점 / 평균 = ${yuriko.sum()}/${yuriko.avg()}`);
+
 
 // 생성자 특징 : 첫 글자 대문자
