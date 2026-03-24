@@ -45,3 +45,18 @@ export function updateValue(object, key, newValue) {
 export function deleteValue(object, deletekey) {
     delete object[deletekey];
 }
+
+export function setObject(key, value) {
+    objects[key] = value;
+}
+
+// 생성자 함수를 이용한 객체 CRUD
+
+ export function Fruit(name, emoji) {
+    this.name = name;
+    this.emoji = emoji;
+
+    this.display = () => {
+        console.log(this.name, this.emoji);
+    }
+}
