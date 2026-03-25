@@ -1,0 +1,51 @@
+/*
+    클래스간의 상속 관계 표현 : extends
+    부모가 가지고 있는 필드, 메소드를 자식이 상속받아 사용하도록 정의
+*/
+//Animal 클래스를 상속받아, Dog, Tiger, Lion 자식 클래스 생성 - 자식 is a 부모 O => 자식 extends 부모 :: 자식클래스 정의
+
+// 부모 : Animal 클래스 정의
+class Animal {
+    constructor(name, emoji) {
+        this.name = name;   //생성자
+        this.emoji = emoji;
+    }
+    display = () => {
+        console.log(this.name, this.emoji);    
+    }
+    sleep = () => {console.log(`${this.name}(${this.emoji})가 자고 있어요!! 💤💤`);
+    }
+}
+
+// 자식 : Dog 클래스 정의, 자식 is a 부모 O
+class Dog extends Animal {
+    constructor(name, emoji, color) {
+        super(name, emoji);    //부모의 생성자 호출, 생성된  name, emoji는 자식에 반환
+        this.color = color;
+    }
+    //display() 함수 주소 참조
+    //sleep() 함수 주소 참조
+}
+
+class Poodle extends Dog{
+    constructor(name, emoji, color, food) {
+        super(name, emoji, color); //반드시 맨위에 호출해야함
+        this.food = food;
+    }
+}
+
+let animal = new Animal('animal', '😹');
+console.log(animal);
+animal.display();
+animal.sleep();
+
+
+let dog = new Dog('happy', '🐶', 'brown');
+console.log(dog);
+dog.display();
+dog.sleep();
+
+let dog2 = new Poodle('해피', '🐶', 'brown', '사료');
+console.log(dog2);
+dog2.display();
+dog2.sleep();
