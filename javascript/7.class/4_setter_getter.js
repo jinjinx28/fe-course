@@ -35,6 +35,10 @@ class Employee{
     console.log(jinjin.getAge());
     jinjin.display();
 
+    jinjin.empno = '2893'; //empno 필드가 새롭게 추가됨!, empno, #empno 2개가 존재함
+    console.log('jinjin.empno ==>', jinjin.empno);
+    console.log(jinjin); 
+
     let nyong = new Employee('0930', '뇽', 25);
     nyong.display();
 
