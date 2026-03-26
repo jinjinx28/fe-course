@@ -11,3 +11,12 @@ let array2 = new Array(2);
 let array3 = new Array(5);
 
 console.log(array1.length, array2.length, array3.length);
+
+let names = ['진진', '뇽', '누리'];
+let fruits = ['🍒','🍋', '🍏']
+console.log(names.length, fruits.length);
+
+//names 배열에 요소 추가
+names[2] = '콩콩'; //에러 발생 X, 새로운 객체를 생성하고 저장
+console.log(names); 
+ 
