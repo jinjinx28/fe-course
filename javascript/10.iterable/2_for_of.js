@@ -30,16 +30,12 @@ function replace1(array, oldItem, newItem) {
     return arrayCopy;
 }
 
-//map
+//map - 새로운 배열객체 반환
 function replace2(array, oldItem, newItem) {  
     //array(= fruits)의 복사본 객체, shallow copy
-    let arrayCopy = Array.from(array);
+    // let arrayCopy = Array.from(array);
 
-    arrayCopy.forEach((item, idx) => {
-        if(item === oldItem) arrayCopy.splice(idx, 1, newItem);
-    });
-    
-    return arrayCopy;
+    return array.map(item => (item === oldItem) ? item = newItem : item);
 }
 
 //replaceObj
@@ -64,6 +60,7 @@ let fruitsObj = [
 ];
 let obj1 = replace(fruits, '🍎', '🍏');  //for..of
 let obj1_1 = replace1(fruits, '🍎', '🍏');  //forEach
+let obj1_2 = replace2(fruits, '🍎', '🍏');  //map
 let obj2 = replaceObj(fruitsObj, '🍋', '🍏');
 
 console.log(fruits);
