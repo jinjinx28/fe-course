@@ -32,7 +32,28 @@ const getObject2 = () => {
     return [1, 2, 3, 4, 5];
 }
 
-let geObj1 = getObject1();
-let geObj2= getObject2();
+let {name, age, job, address} = getObject1();
+let [n1, n2, n3, n4, n5] = getObject2();
+console.clear();
+console.log(name, age, job, address);
+console.log(n1, n2, n3, n4, n5);
 
-console.log(geObj1, geObj2);
+
+// TextList를 입력받아, 3글자 이상의 text이면 새로운 배열 생성
+// 함수 생성
+const textFilter = (textList) => {
+    return textList.filter(text => text.length >= 3);
+}
+
+// TextList를 입력받아, 3글자 이하의 text이면 새로운 배열 생성
+// 함수 생성
+const textFilter2 = (textList) => {
+    return textList.filter(text => !(text.length >= 3));
+}
+let result = textFilter(['javascript', 'react', 'html', 'css', 'a', 'ab']);
+let result2 = textFilter2(['javascript', 'react', 'html', 'css', 'a', 'ab']);
+console.log(result);
+console.log(result2);
+
+
+
