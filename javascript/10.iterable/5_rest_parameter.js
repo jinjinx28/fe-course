@@ -16,7 +16,9 @@ function add (a, b, ...numbers) {
 }
   
 const fadd = (f1, ...fruits) => {      //...fruits : rest 파라미터
-    console.log(f1, fruits);
+    console.log(f1, ...fruits);
+    // return {f1, ...fruits};
+    return [f1, ...fruits];
 }
 
 let result1 = add(1, 2, 3, 4, 5);
@@ -24,4 +26,5 @@ let result2 = add(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 console.log(result1, result2);
 
 let fruits = ['🍓', '🍉', '🥥', '🥝'];
-fadd('🍋', ...fruits);  //...fruits : spread 연산자 ( 전개 구문 )
+let fobj = fadd('🍋', ...fruits);  //...fruits : spread 연산자 ( 전개 구문 )
+console.log('fobj = ', fobj);
