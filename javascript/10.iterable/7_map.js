@@ -27,4 +27,27 @@ console.log(emoji);
     
         // console.log(fruitsMap.get('cherry'))
         //console.log('준비 중입니다.');
+
+// 업데이트 시 set
+// 데이터 없을 땐 : 추가 / 데이터 있을 땐 : 업데이트
+fruitsMap.set('apple', '🍎');
+console.clear();
+console.log(fruitsMap);
+
+// 삭제 delete(key)
+// 데이터 없을 땐 : 추가 / 데이터 있을 땐 : 삭제
+// apple 삭제
+if (fruitsMap.has('apple')) {
+    fruitsMap.delete('apple')
+} else {
+    fruitsMap.set('apple');
+}
+console.log(fruitsMap);
+
+// entries()
+let fruitsArray = fruitsMap.entries();
+console.log(fruitsArray);
+
+
+
     
