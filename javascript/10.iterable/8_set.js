@@ -21,9 +21,13 @@ for(const value of mySet){
     console.log(value);
     
 }
-for(const value of mySet){
-    if(mySet.has('진진')) { 
-        console.log(value); 
+console.clear();
+console.log('진진 검색 start ------');
+
+if(mySet.has('진진')) {
+    for(const value of mySet){
+        if(mySet.has('진진')) 
+            console.log(value); 
     }
 }
 console.log(mySet.has('진진'));

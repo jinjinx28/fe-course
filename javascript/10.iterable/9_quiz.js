@@ -19,3 +19,20 @@ console.log(myArray);
 console.log(myArray[0]);
 
 
+// 구조 분해 할당
+const getObject1 = () => {
+    return {
+        name : '진진',
+        age : 23,
+        job : '개발자',
+        address : '서울시'
+    }
+}
+const getObject2 = () => {
+    return [1, 2, 3, 4, 5];
+}
+
+let geObj1 = getObject1();
+let geObj2= getObject2();
+
+console.log(geObj1, geObj2);
