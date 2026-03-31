@@ -15,14 +15,34 @@ const getJson = async () => {
 //show 함수 생성
 const show = async () => {
     let jsonData = await getJson();
-    console.log('jsonData =>', jsonData);
+    console.log('jsonData =>', jsonData, typeof jsonData);
     //return jsonData; //Promise 타입으로 리턴
 
     let output = `
-        <h1>Fruits List</h1>
+        <h2>${jsonData.title}</h2>
+        <table border=1>
+            <tr>
+                <th>NO</th>
+                <th>NAME</th>
+                <th>COLOR</th>
+                <th>EMOJI</th>
+            </tr>
+            ${  //자바스크립트 코드 
+                jsonData.list.map((fruit, idx) => 
+                    `<tr>
+                        <td>${idx+1}</td>
+                        <td>${fruit.name}</td>
+                        <td>${fruit.color}</td> 
+                        <td>${fruit.emoji}</td>
+                    </tr>`
+                ).join("")  // 배열에서 문자로 바꿔주는 함수 : join
+            }
+        </table>
     `;
 
-    document.querySelector('#content').innerHTML = output
+    // console.log(output);
+
+    document.querySelector('#content').innerHTML = output;
 }
 
 // show();

@@ -1,19 +1,64 @@
-[
-    {
-        "name" : "cherry",
-        "color" : "red",
-        "emojin" : "🍒"
-    },
+{
+    "title" : "🍒🍋🍈Fruits List🍒🍋🍈",
+    "list" : [
+        {
+            "name" : "cherry",
+            "color" : "red",
+            "emoji" : "🍒"
+        },
 
-    {
-        "name" : "lemon",
-        "color" : "yellow",
-        "emojin" : "🍋"
-    }, 
+        {
+            "name" : "lemon",
+            "color" : "yellow",
+            "emoji" : "🍋"
+        }, 
 
-    {
-        "name" : "melon",
-        "color" : "green",
-        "emojin" : "🍈"
-    }
-]
+        {
+            "name" : "melon",
+            "color" : "green",
+            "emoji" : "🍈"
+        },
+
+        {
+            "name" : "cherry",
+            "color" : "red",
+            "emoji" : "🍒"
+        },
+
+        {
+            "name" : "lemon",
+            "color" : "yellow",
+            "emoji" : "🍋"
+        }, 
+
+        {
+            "name" : "melon",
+            "color" : "green",
+            "emoji" : "🍈"
+        },
+
+        {
+            "name" : "cherry",
+            "color" : "red",
+            "emoji" : "🍒"
+        },
+
+        {
+            "name" : "lemon",
+            "color" : "yellow",
+            "emoji" : "🍋"
+        }, 
+
+        {
+            "name" : "melon",
+            "color" : "green",
+            "emoji" : "🍈"
+        }
+    
+    ]
+}
+
+
+
+
+
