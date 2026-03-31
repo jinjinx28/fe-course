@@ -1,0 +1,19 @@
+[
+    {
+        "name" : "cherry",
+        "color" : "red",
+        "emojin" : "🍒"
+    },
+
+    {
+        "name" : "lemon",
+        "color" : "yellow",
+        "emojin" : "🍋"
+    }, 
+
+    {
+        "name" : "melon",
+        "color" : "green",
+        "emojin" : "🍈"
+    }
+]

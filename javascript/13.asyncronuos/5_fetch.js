@@ -4,32 +4,42 @@
     - Web API 구조는 보통 JSON 형태
 */
 
+let data_url = 'http://127.0.0.1:5500/javascript/13.asyncronuos/data.json'
 
 const getJson = () => {
-    fetch('http://127.0.0.1:5500/javascript/13.asyncronuos/data.json')
+    fetch(data_url)
         .then(response => response.json())
         .then(jsonData => console.log(jsonData))
         .catch(error => console.log('error =>', error));
 }
 
 function getJson2() {
-    fetch('http://127.0.0.1:5500/javascript/13.asyncronuos/data.json')
+    fetch(data_url)
     .then((response) => {return response.json()})
     .then((jsonData) => {console.log('jsonData ==>', jsonData)})
     .catch((error) => {console.log('error =>', error)});
 }
 
 const getJson3 = async () => {
-    let response = await fetch('http://127.0.0.1:5500/javascript/13.asyncronuos/data.json')
-    console.log('response => \n', response);
-    
+    let response = await fetch(data_url)
+    return response.json();
 }
 
-function getJson4() {
+async function getJson4() {
+    let response = await fetch(data_url)
+    return response.json();
+}
 
+async function test() {
+    let jsonData1 = await getJson3();  //pending = 대기 (Web API에 잇음)
+    let jsonData2 = await getJson4(); 
+    
+    console.log(jsonData1);
+    console.log(jsonData2);
 }
 
 getJson();
 getJson2();
-getJson3(); //pending = 대기 (Web API에 잇음)
+test();
+
 
