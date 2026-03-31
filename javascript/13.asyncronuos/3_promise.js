@@ -7,3 +7,27 @@
     - Promise 객체 호출 
         : ex ) 프로미스객체.then(성공시 callback).catch(실패시 callback);
 */
+
+// Promise 객체 생성
+const promise = new Promise((resolve, reject) => {
+    // 비동기식 로직 (미래의 작업)
+    let success = true;
+    //let success = false;
+    if(success) {
+        resolve('성공!!');
+    } else {
+        reject('실패!!');
+    }
+});
+
+console.log(`promise 객체 호출 ----------->`);
+
+promise
+    .then((result) => {
+        console.log('result ===>', result);
+    })
+    .catch((error) => {
+        console.log('error ===>', error);
+    });
+
+console.log(`----------- 프로그램 종료 -----------`);
