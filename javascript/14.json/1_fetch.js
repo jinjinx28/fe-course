@@ -1,5 +1,5 @@
 let key = `0b9b6c35fe9f88366306e9356d6668e1`;
-let targetDt = '20260101';
+let targetDt = '20260331';
 const data_url = `http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=${key}&targetDt=${targetDt}`;
 
 
@@ -26,6 +26,18 @@ const show = async () => {
                 <th>누적 관객 수</th>
                 <th>누적 매출액</th>
             </tr>
+            ${
+                kobis.boxOfficeResult.dailyBoxOfficeList.map((movie) => 
+                    `<tr>
+                        <td>${movie.rank}</td>
+                        <td>${movie.movieNm}</td>
+                        <td>${movie.openDt}</td>
+                        <td>${movie.audiCnt}</td>
+                        <td>${movie.audiAcc}</td>
+                        <td>${movie.salesAcc}</td>
+                    </tr>`
+                ).join("") 
+            }
         </table>
     `;
     
