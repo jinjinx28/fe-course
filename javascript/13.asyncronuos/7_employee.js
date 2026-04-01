@@ -21,6 +21,7 @@ const show = async () => {
                 <th>Name</th>
                 <th>Age</th>
                 <th>Dep</th>
+                <th>Emo</th>
             </tr>
             ${
                 jsonData.list.map((employee, idx) => 
@@ -29,6 +30,7 @@ const show = async () => {
                         <td>${employee.name}</td>
                         <td>${employee.age}</td>
                         <td>${employee.department}</td>
+                        <td>${employee.emoji}</td>
                     </tr>`
                 ).join("")
             }

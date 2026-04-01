@@ -1,9 +1,9 @@
 {
     "title" : "🧼Good Company🧼",
     "list" : [
-        {"name" : "진진", "age" : 23, "department" : "개발"},
-        {"name" : "뇽", "age" : 25, "department" : "영업"},
-        {"name" : "누리", "age" : 5, "department" : "HR"},
-        {"name" : "카나에", "age" : 27, "department" : "총무"}
+        {"name" : "진진", "age" : 23, "department" : "개발", "emoji" : "👩🏻‍💻👨🏻‍💻"},
+        {"name" : "뇽", "age" : 25, "department" : "영업", "emoji" : "🙋🏻‍♀️🙋🏻‍♂️"},
+        {"name" : "누리", "age" : 5, "department" : "인사", "emoji" : "👩🏻‍💼👨🏻‍💼"},
+        {"name" : "카나에", "age" : 27, "department" : "총무", "emoji" : "👩🏻‍⚖️👨🏻‍⚖️"}
     ]
 }
