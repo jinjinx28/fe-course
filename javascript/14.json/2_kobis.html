@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KOBIS</title>
     <script src="2_kobis.js"></script>
+    <link rel="stylesheet" href="2_modal.css">
 </head>
 <body>
     <h1>KOBIS BOX OFFICE</h1>
@@ -18,5 +19,13 @@
     <h3>날짜 : <input type='date' id="sdate">
         <button type='button' onclick="handleBoxOffice()">실행</button></h3>
     <div id="content"></div>
+
+    <!-- modal -->
+     <div id="modal" style="display: none;">
+        <div id="modal-content">
+            <span id="modal-close"></span>
+            <div id="modal-body"></div>
+        </div>
+     </div>
 </body>
 </html>

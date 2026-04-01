@@ -6,14 +6,44 @@ const getJson = async(type, targetDt) => {
     return response.json();
 }
 
-
-
-const handleMovieInfo = async (movieCd) => {
+const getMovieInfo = async(movieCd) => { 
     //영화상세  API를 통해 json 객체 가져오기
     let url = `http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=${key}&movieCd=${movieCd}`;
     let response = await fetch(url);
-    console.log(response.json());  
+    return response.json();
+}
 
+/** openModal */
+const openModal = (infoObj) => {
+    let modal = document.querySelector('#modal');
+    let modalBody = document.querySelector('#modal-body');
+    let modalClose = document.querySelector('#modal-close');
+
+    modalClose.addEventListener('click', () => {
+        modal.style.display = 'none';
+        modalBody.innerHTML = '';
+    })
+
+    let output = `
+        <h3>[${infoObj.rank}]${infoObj.movieNm}</h3>
+        <ul>
+            <li><label>🎞감독 : </label> ${infoObj.director}</li>
+            <li><label>🧑배우 : </label> ${infoObj.actors}</li>
+        </ul>
+    `;
+
+    modal.style.display = 'flex';
+    modalBody.innerHTML = output;
+}
+
+const handleMovieInfo = async (movieCd, rank) => {
+    let info = await getMovieInfo(movieCd);
+    let movieNm = info.movieInfoResult.movieInfo.movieNm;
+    let director = info.movieInfoResult.movieInfo.directors[0].peopleNm;
+    let actors = info.movieInfoResult.movieInfo.actors[0].peopleNm;
+
+    console.log(info, movieNm, director, actors); 
+    openModal({movieNm, director, actors, rank});
 }
 
 
@@ -56,7 +86,7 @@ console.log(kobis);
                     kobisBoxOfficeList.map((movie) => `
                         <tr>
                             <td>${movie.rank}</td>
-                            <td><a href="#" onclick="handleMovieInfo(${movie.movieCd})">${movie.movieNm}</a></td>
+                            <td><a href="#" onclick="handleMovieInfo(${movie.movieCd}, ${movie.rank})">${movie.movieNm}</a></td>
                             <td>${movie.openDt}</td>
                             <td>${parseInt(movie.audiCnt).toLocaleString()}</td>
                             <td>${parseInt(movie.audiAcc).toLocaleString()}</td>
