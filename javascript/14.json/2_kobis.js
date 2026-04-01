@@ -1,9 +1,19 @@
-let key = `6206e4e96646c240ac59f09bc0164ff9`;
+let key = `0b9b6c35fe9f88366306e9356d6668e1`;
 
 const getJson = async(type, targetDt) => {
     const data_url = `http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/search${type}BoxOfficeList.json?key=${key}&targetDt=${targetDt}`;
     let response = await fetch(data_url);
     return response.json();
+}
+
+
+
+const handleMovieInfo = async (movieCd) => {
+    //영화상세  API를 통해 json 객체 가져오기
+    let url = `http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=${key}&movieCd=${movieCd}`;
+    let response = await fetch(url);
+    console.log(response.json());  
+
 }
 
 
@@ -46,7 +56,7 @@ console.log(kobis);
                     kobisBoxOfficeList.map((movie) => `
                         <tr>
                             <td>${movie.rank}</td>
-                            <td>${movie.movieNm}</td>
+                            <td><a href="#" onclick="handleMovieInfo(${movie.movieCd})">${movie.movieNm}</a></td>
                             <td>${movie.openDt}</td>
                             <td>${parseInt(movie.audiCnt).toLocaleString()}</td>
                             <td>${parseInt(movie.audiAcc).toLocaleString()}</td>
