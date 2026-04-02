@@ -18,6 +18,7 @@ const openModal = (infoObj) => {
     let modal = document.querySelector('#modal');
     let modalBody = document.querySelector('#modal-body');
     let modalClose = document.querySelector('#modal-close');
+    let poster = infoObj.posterObj.split(",");
 
     modalClose.addEventListener('click', () => {
         modal.style.display = 'none';
@@ -27,6 +28,14 @@ const openModal = (infoObj) => {
     let output = `
         <h3>[${infoObj.rank}]${infoObj.movieNm}</h3>
         <ul>
+            <li>
+            ${
+                posters.map(poster => `
+                        <img src="${poster} style = "width:100px">
+                    `).join("")
+            }
+            </li>
+            <li><img src="${infoObj.poster}" style = "width:100px;"></li>
             <li><label>🎞감독 : </label> ${infoObj.director}</li>
             <li><label>🧑배우 : </label> ${infoObj.actors}</li>
         </ul>
@@ -36,14 +45,14 @@ const openModal = (infoObj) => {
     modalBody.innerHTML = output;
 }
 
-const handleMovieInfo = async (movieCd, rank) => {
+const handleMovieInfo = async (movieCd, rank, poster) => {
     let info = await getMovieInfo(movieCd);
     let movieNm = info.movieInfoResult.movieInfo.movieNm;
     let director = info.movieInfoResult.movieInfo.directors[0].peopleNm;
     let actors = info.movieInfoResult.movieInfo.actors[0].peopleNm;
 
     console.log(info, movieNm, director, actors); 
-    openModal({movieNm, director, actors, rank});
+    openModal({movieNm, director, actors, rank, poster});
 }
 
 //poster 가져오기 : KMDB API
@@ -51,22 +60,20 @@ const searchMoviePoster = async (movieNm, openDt) => {
     const key = '59H5F0U0OFQB3R2261VM';
     let kmdb_url = `http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api`;
     kmdb_url += `/search_json2.jsp?collection=kmdb_new2&detail=Y`;
-    kmdb_url += `&title=${movieNm}`;
+    kmdb_url += `&title=${encodeURIComponent(movieNm)}`; 
     kmdb_url += `&releaseDts=${openDt}&ServiceKey=${key}`;
 
     let response = await fetch(kmdb_url);
     let kmdb = await response.json(); 
-    let data = await kmdb.Data[0].Result[0];
-    let poster = null;
-    if(data === null) {
-        poster = [];
-    } else {
-        poster = await kmdb.Data[0].Result[0].posters.split("|");
-    }
     
-    return poster;
+    if (kmdb && kmdb.Data && kmdb.Data[0] && kmdb.Data[0].Result) {
+        let posterStr = kmdb.Data[0].Result[0].posters;
+        return posterStr ? posterStr.split("|") : [""]; 
+    } else {
+        console.log(`${movieNm} 포스터 없음`);
+        return [""]; 
+    }
 }
-
 
 //handleBoxOffice 함수 정의
 const handleBoxOffice = async() => {
@@ -85,6 +92,7 @@ const handleBoxOffice = async() => {
         let kobisBoxOffice =  kobis.boxOfficeResult;
         let kobisBoxOfficeList = null;
         let posterList = [];
+
         if(type === 'Daily') {
             kobisBoxOfficeList =  kobis.boxOfficeResult.dailyBoxOfficeList;
         } else {
@@ -118,7 +126,7 @@ const handleBoxOffice = async() => {
                             <td>${movie.rank}</td>
                             <td>
                                 <img src="${posterList[idx]}" style="width:80px;">
-                                <a href="#" onclick="handleMovieInfo(${movie.movieCd}, ${movie.rank})">${movie.movieNm}</a></td>
+                                <a href="#" onclick="handleMovieInfo('${movie.movieCd}', '${movie.rank}', '${posterList[idx]}')">${movie.movieNm}</a></td>
                             <td>${movie.openDt}</td>
                             <td>${parseInt(movie.audiCnt).toLocaleString()}</td>
                             <td>${parseInt(movie.audiAcc).toLocaleString()}</td>
