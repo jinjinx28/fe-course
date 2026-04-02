@@ -46,6 +46,18 @@ const handleMovieInfo = async (movieCd, rank) => {
     openModal({movieNm, director, actors, rank});
 }
 
+//poster 가져오기 : KMDB API
+const searchMoviePoster = (movieNm, openDt) => {
+    const key = '59H5F0U0OFQB3R2261VM';
+    let kmdb_url = `http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api`;
+    kmdb_url += `/search_json2.jsp?collection=kmdb_new2&detail=Y`;
+    kmdb_url += `&title=${movieNm}`;
+    kmdb_url += `&releaseDts=${openDt}&ServiceKey=${key}`;
+
+    console.log(kmdb_url);
+    
+}
+
 
 //handleBoxOffice 함수 정의
 const handleBoxOffice = async() => {
@@ -68,7 +80,16 @@ const handleBoxOffice = async() => {
         } else {
             kobisBoxOfficeList =  kobis.boxOfficeResult.weeklyBoxOfficeList;
         }
-console.log(kobis);
+
+        //영화 제목 (movieNm), 개봉일(openDt)
+        let movieNm = kobisBoxOfficeList[0].movieNm;
+        let openDt = kobisBoxOfficeList[0].openDt.split("-").reduce((acc, cur) => acc + cur);
+        console.log(movieNm, openDt);
+
+        searchMoviePoster(movieNm, openDt);
+        
+
+// console.log(kobis);
 
         let output = `
             <h1>${kobisBoxOffice.boxofficeType}</h1>
