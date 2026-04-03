@@ -13,4 +13,36 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // 테이블 생성 함수
+    createTable();
+
 }); //window event
+
+//JSON 데이터 가져오기
+async function getJson() {
+    let response = await fetch('../json/support.json');
+    return (await response).json();
+}
+
+async function createTable() {
+    let list = await getJson();
+    // console.log('list =>', list);
+    let output = `<table>
+                    <thead>
+                        <tr>
+                            <th>번호</th>
+                            <th>구분</th>
+                            <th>제목</th>
+                            <th>등록일</th>
+                            <th>조회수</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="5">1 2 3 4 5  >></td>
+                        </tr>
+                    </tfoot>`;
+    
+}
