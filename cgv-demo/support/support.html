@@ -6,6 +6,7 @@
     <title>CGV-Demo</title>
     <link rel="stylesheet" href="../css/cgv.css">
     <link rel="stylesheet" href="../css/commons.css">
+    <script src="../js/cgv_support.js"></script>
 </head>
 <body>
     <iframe src="../html/header.html" frameborder="0" width="100%" height="150px"></iframe>
@@ -20,8 +21,8 @@
                         <option value="">제목</option>
                         <option value="title">내용</option>
                     </select>
-                    <input type="text" name="search_content">
-                    <button>검색하기</button>
+                    <input type="text" name="search_content" id="search_content">
+                    <button type="button" id="btnSearch">검색하기</button>
                 </div>
                 <nav>
                     <ul class="filter-menu">
