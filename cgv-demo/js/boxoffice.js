@@ -12,11 +12,29 @@ async function getKobis() {
     return response.json();    
 }
 
+/* KMDB API - 포스터 가져오기 */
+async function getPoster(movieNm, openDt) {
+    openDt = openDt.split('-').reduce((acc, cur) => acc + cur);
+    // console.log('getPoster => ', movieNm, openDt);
+    
+    let url = `http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api`;
+    url += `/search_json2.jsp?collection=kmdb_new2&detail=Y`;
+    url += `&title=${encodeURIComponent(movieNm)}`; 
+    url += `&releaseDts=${openDt}&ServiceKey=${kmdb_key}`;
+
+    let response = await fetch(url);
+    let kmdb = await response.json();
+    let posters = await kmdb?.Data?.[0]?.Result?.[0]?.posters?.split('|');      //?. = 있으면 감, 없으면 멈춤
+    // console.log('result =>', posters[0]);
+
+    return posters?.[0];
+}
 
 async function createBocoffice() {
     let kobis = await getKobis();
     let list = kobis.boxOfficeResult.dailyBoxOfficeList;
     console.log(kobis);
+    // let showList = [];
 
     // let idx = 0;
     // for(const movie of list) {
@@ -27,10 +45,16 @@ async function createBocoffice() {
     //     }
     // }
 
-    list.slice(0, 5).map((movie, idx) => {
-        console.log(movie.movieNm);
+    let showList = list.slice(0, 5).map( async (movie, idx) => {
+        let movieNm = movie.movieNm;
+        let openDt = movie.openDt;
+        let poster = await getPoster(movie.movieNm, movie.openDt);
+        // console.log(movie.movieNm, movie.openDt, poster);
+        return {movieNm, openDt, poster}
+    });   //[{movieNm : 영화제목, openDt : 개봉일 , poster : 포스터}, {~}...]
 
-    });
+    console.log('showList =>', showList);
+    
 }
 
 window.addEventListener('DOMContentLoaded', () => {
