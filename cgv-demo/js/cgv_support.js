@@ -17,7 +17,31 @@ window.addEventListener('DOMContentLoaded', () => {
     // createTable();
     filterMenu('all'); //맨 처음 호출되는 테이블
 
+    let menuList = document.querySelectorAll('.filter-menu li a');
+    menuList.forEach(menu => {
+        menuList.forEach(menu => menu.id === 'all'? 
+            menuSelectColor(menu) : menuDefaultColor(menu));
+            
+        menu.addEventListener('click', () => {
+            menuList.forEach(menu => menuDefaultColor(menu));
+            menuSelectColor(menu);
+            filterMenu(menu.id);
+        });
+    });
+    
 }); //window event
+
+function menuDefaultColor(menu) {
+    menu.style.background = "rgb(137,137,135)";
+    menu.style.borderLeft = `1px solid var(rgb(137,137,135))`;
+    menu.style.borderBottom = `2px solid var(rgb(137,137,135))`;
+}
+
+function menuSelectColor(menu) {
+    menu.style.background = "rgb(251, 67, 87)";
+    menu.style.borderLeft = `1px solid var(rgb(251, 67, 87))`;
+    menu.style.borderBottom = `2px solid var(rgb(251, 67, 87))`;
+}
 
 //filterMenu 함수 생성
 async function filterMenu(type) {

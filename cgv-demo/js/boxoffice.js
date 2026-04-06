@@ -81,7 +81,6 @@ async function createBoxoffice() {
     console.log(output);
     document.querySelector('#boxoffice').innerHTML = output;
     
-    
     // let showList = [];
 
     // let idx = 0;
