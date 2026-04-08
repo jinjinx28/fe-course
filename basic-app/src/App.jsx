@@ -10,11 +10,24 @@ import people3 from './assets/people3.webp';
 
 
 export default function App() {
-
-  return ( //화면 출력
+  const list = [
+    {img: people1, style:style.avatar_img},
+    {img: people2, style:style.avatar_img},
+    {img: people3, style:style.avatar_img_circle},
+    {img: people3, style:style.avatar_img}
+  ]
+  const alist = [
+    {img: people1, name: "Smith" },
+    {img: people2, name: "James"},
+    {img: people3, name: "Anne"},
+    {img: people3, name: "Anne"}
+  ]
+  return ( 
     <>
-      <AvatarImage img={people3}/>
-      <Avatar name="Sara" img={people3}/>
+      <AvatarImage img={people1} style={style.avatar_img}/>
+      <Avatar name="Anne" img={people3} />
+      <AvatarImageList imgList={list} />
+      <AvatarList list={alist} />
     </>
   )
 }

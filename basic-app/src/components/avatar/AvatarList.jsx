@@ -1,11 +1,16 @@
 import Avatar from "./Avatar";
+import style from './Avatar.module.css';
+
 
 export default function AvatarList({list}) {
     return(
-        <div>
-            {list.map((item) => 
-                <Avatar img = {item.img} name={item.name} />
-            )}
+        <div className={style.avatar_list}>
+            { list.map((item, idx) => 
+                <Avatar img={item.img} 
+                        name={item.name} 
+                        key={idx}
+                    /> ) }
         </div>
     )
 }
+
