@@ -167,13 +167,33 @@
           }
 
           return (
-            <Child name = "진진" info = {info}/>
+            <Child {...info}/>
           )
         }
-        function Child(props) {  //props= {name : "진진"}
+        function Child({name, age}) {  
           let {name} = props;
           return(
-            <h1>Hello my name is {name}!!</h1>
+            <h1>Hello my name is {name}, {age}!!</h1>
+          )
+        }
+    
+    4 ) Props로 컴포넌트 전달하기
+        function PropsComp() {
+          return (
+            <h1>PropsComponent!!</h1>
+          )
+        } 
+        function Parent() {
+          return (
+            <Child>
+              <PropsComp/>
+            </Child>
+          )
+        }
+        function Child({children}) {  
+          return(
+            <h1>Hello </h1>
+            {children}
           )
         }
      
