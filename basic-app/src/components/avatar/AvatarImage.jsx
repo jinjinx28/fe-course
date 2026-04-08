@@ -1,8 +1,7 @@
-import style from './Avatar.module.css';
+// import style from './Avatar.module.css';
 
-export default function AvatarImage(props) {
+export default function AvatarImage({img, style}) {
     return (
-        //props = {img : 이미지 주소}
-        <img src={props.img} className={style.avatar_img} alt="photo" />
+        <img src={img} className={style} alt="photo" />
     )
 }
