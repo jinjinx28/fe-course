@@ -1,5 +1,7 @@
+import style from './Body.module.css';
+
 export default function Body() {
     return(
-        <button className="button">Body :: CLICK</button>
+        <button className={style.button}>Body :: CLICK</button>
     )
 }
