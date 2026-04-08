@@ -1,5 +1,7 @@
 import AvatarImage from "./components/avatar/AvatarImage.jsx";
+import AvatarImageList from "./components/avatar/AvatarImageList.jsx";
 import Avatar from "./components/avatar/Avatar.jsx";
+import AvatarList from "./components/avatar/AvatarList.jsx";
 import Menu from "./components/menu/Menu.jsx";
 import style from './components/menu/Menu.module.css';
 import people1 from './assets/people1.webp';
