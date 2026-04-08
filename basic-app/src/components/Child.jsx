@@ -1,9 +1,9 @@
 
-export default function Child({name, age, info}) {
-    // let {name} = props;  {name:"", age:20}
-    console.log(name, age, info);
-    
+export default function Child({children}) {
     return(
-        <h1>Hello~ My name is {name}, {age}</h1>
+        <>
+            <h1>Hello</h1>
+            {children}
+        </>
     )
 }
