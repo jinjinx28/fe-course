@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-export default function BasicCounter() {
+export default function BasicCounter({ click, total }) {
     let [count, setCount] = useState(0);
     let [flag, setFlag] = useState(false);
 
@@ -9,34 +9,27 @@ export default function BasicCounter() {
         if(type === "+") {
             if(count < 10) {
                 setCount(count+1);  
-                setFlag(true);           
+                setFlag(true);
+                click(type);           
             }
         } else if(type === "-") {
             if(count > 0) {
                 setCount(count-1);
                 setFlag(false);
+                click(type);
             }
         } else {
             setCount(0);
         }
     }
-
-    // const increment = () => {
-    //     if(count < 10) setCount(count+1);    
-    // }
-    // const decrement = () => {
-    //     if(count > 0) setCount(count-1);
-    // }
-    // const reset = () => {
-    //     setCount(0);    
-    // }
-    return(
-        <div style={{border:'1px solid darkgray', padding:'10px 20px'}}>
+    return (
+        <div style={{   border: '1px solid gray', 
+                        padding: '10px 20px',
+                        margin: '20px'}}>
             <h1>React Counter</h1>
-            <h2>Counter ::  
-                {flag? <span style={{color:'aqua'}}>{count}</span> : <span style={{color:'pink'}}>{count}</span>}
+            <h2>Counter :: 
+                {flag? <span style={{color:'aqua'}}>{count} / {total}</span> : <span style={{color:'pink'}}>{count} / {total}</span>}
             </h2>
-
             <div>
                 <button type="button" name="+" onClick={handleCounter}>증가(+)</button>
                 <button type="button" name="-" onClick={handleCounter}>감소(-)</button>
