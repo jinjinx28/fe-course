@@ -9,11 +9,12 @@ import people1 from './assets/people1.webp';
 import people2 from './assets/people2.webp';
 import people3 from './assets/people3.webp';
 import TextInput from "./components/form/TextInput.jsx";
+import UserInfo from "./components/form/UserInfo2.jsx";
 
 export default function App() {
   return ( 
     <>
-     <TextInput />
+     <UserInfo />
     </>
   )
 }

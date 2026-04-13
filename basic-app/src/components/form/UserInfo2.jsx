@@ -9,10 +9,10 @@ import TextInput from './TextInput.jsx';
 
 export default function UserInfo() {
     const forms = [
-        {label : "이름", type : "text", name : "name"},
-        {label : "나이", type : "text", name : "age"},
-        {label : "주소", type : "text", name : "address"},
-        {label : "직업", type : "text", name : "job"}
+        {label : "이름", type : "text", name : "name", isRequired : true},
+        {label : "나이", type : "text", name : "age", isRequired : true},
+        {label : "주소", type : "text", name : "address", isRequired : true},
+        {label : "직업", type : "text", name : "job", isRequired : true}
     ];
     // const refs = {
     //     nameRef : useRef(null),
@@ -52,7 +52,7 @@ export default function UserInfo() {
                 <ul> 
                     {forms.map((item) => 
                         <li>
-                            <label htmlFor="name">{item.label}</label>
+                            <span>🥱</span><label htmlFor="name">{item.label}</label>
                             { !form?.[item.name]?.trim() && <span style={{color:'red', fontSize:'0.6rem'}}> {item.label}을 입력해주세요</span> }
                             <div>
                                 <TextInput  item={item}

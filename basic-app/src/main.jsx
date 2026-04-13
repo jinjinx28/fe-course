@@ -6,7 +6,7 @@ import { createRoot } from 'react-dom/client'
 // import App from './AppButton.jsx'
 // import App from './AppCommon.jsx'
 // import App from './AppCounter.jsx'
-import App from './AppForm.jsx'
+import App from './App.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
