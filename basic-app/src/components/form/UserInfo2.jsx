@@ -47,35 +47,37 @@ export default function UserInfo() {
 
     return(
         <div>
-            <h1>UserInfo</h1>
+            <h1>UserInfo2</h1>
             <form name="userInfoForm" onSubmit={handleSubmit}>
-                <ul>
-                    {forms.map((item, idx) => (
-                        <li key={idx}> 
-                        <label htmlFor={item.name}>{item.label}</label>
-                        
-                        {!form[item.name]?.trim() && (
-                            <span style={{ color: 'red', fontSize: '0.6rem' }}>
-                                {item.label}을(를) 입력해주세요
-                            </span>
-                        )}
-
-                        <div>
-                            <TextInput 
-                                item={item}
-                                value={form[item.name]}
-                                handleChange={handleChange}
-                                ref={(e) => (refs[`${item.name}Ref`] = e)} 
-                            />
-                        </div>
-                    </li>
-                ))}
+                <ul> 
+                    {forms.map((item) => 
+                        <li>
+                            <label htmlFor="name">{item.label}</label>
+                            { !form?.[item.name]?.trim() && <span style={{color:'red', fontSize:'0.6rem'}}> {item.label}을 입력해주세요</span> }
+                            <div>
+                                <TextInput  item={item}
+                                            value={form[item.name]}
+                                            handleChange={handleChange}
+                                            inputRef={(e) => refs.current[item.name] = e}
+                                />
+                                {/* <input  type="text" 
+                                        id="name" 
+                                        name="name"
+                                        value={form.name}
+                                        onChange={handleChange}
+                                        ref={refs.nameRef}                                    
+                                        /> */}
+                            </div>
+                        </li>
+                    )}                   
                     <li>
                         <button type="submit">전송</button>
-                        <button type="button" onClick={() => setForm({name : '', age : '', address : '', job : ''})}>다시쓰기</button>
+                        <button type="button" 
+                                onClick={()=> setForm({name:'', age:'', address:'', job:''})}>다시쓰기</button>
                     </li>
+                    
                 </ul>
             </form>
         </div>
-    )
+    );
 }
