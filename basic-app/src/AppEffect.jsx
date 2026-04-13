@@ -6,11 +6,11 @@ export default function App() {
     const [show, setShow] = useState(true);
     return(
         <>
-            {show && <EffectCounter/>}
+            {/* {show && <EffectCounter/>}
             <button onClick={() => setShow(!show)}>
                 {show? "숨기기" : "보이기"}
             </button>
-            <hr/>
+            <hr/> */}
             <EffectFetch/>
         </>
     )

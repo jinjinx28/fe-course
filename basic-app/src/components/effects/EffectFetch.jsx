@@ -1,23 +1,34 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import AvatarList from '../avatar/AvatarList.jsx';
+import people1 from '../../assets/people1.webp';
+import people2 from '../../assets/people2.webp';
+import people3 from '../../assets/people3.webp';
 
-export default function EffectCounter() {
+export default function EffectFetch() {
+    const [data, setData] = useState([]);
     const [count, setCount] = useState(0);
-    
-    useEffect(()=>{
-        console.log('🟢mount & update!!');
-        return () => {
-            console.log('🔴컴포넌트 마운트시 작업할 내용 호출!!');
-            console.log('🔴unmount!!');
-        }        
+    const url = "http://localhost:5173/data/alist.json";
+
+    useEffect(() => {
+        console.log('===> 마운트 or 업데이트시 호출!!');
+         const fetchData = async () => {
+            const response = await fetch(url);
+            const jsonData = await response.json();
+            setData(jsonData);
+        }
+
+        fetchData();
     }, [count]);
 
-    return (
-        <div style={{width:'200px', 
-                    textAlign:'center',
-                    border: '1px solid gray'}} > 
-            <h1>{count}</h1>
-            <button type="button" onClick={()=> setCount(count+1)}>증가(+)</button>
-            <button type="button" onClick={()=> setCount(count-1)}>감소(-)</button>
-        </div>
+    console.log('data ===> ', data);
+    
+    return(
+        <>
+            <h2>{count}</h2>
+            <AvatarList list={data} />
+            <button type="button" onClick={() => {setCount(count+1)}}>증가(+)</button>
+            <button type="button" onClick={() => {setCount(count-1)}}>감소(-)</button>
+        </>
     )
 }
+    
