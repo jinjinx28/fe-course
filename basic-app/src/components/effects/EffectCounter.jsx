@@ -1,7 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function EffectCounter() {
     const [count, setCount] = useState(0);
+
+    useEffect(() => {
+        console.log('👌mount & update!👌');
+        return () => {
+            console.log('💢컴포넌트 마운트시 작업할 내용 호출!!💢');
+            console.log('💢umount💢');
+        }
+        
+    }, [count]);
 
     return(
         <div style={{width : '200px', 
