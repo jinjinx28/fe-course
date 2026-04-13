@@ -4,7 +4,7 @@
     - 전송 버튼 클릭시 유효성 체크 진행
 */
 import {useRef, useState} from 'react';
- import {validateUserInfo} from '../../util/validate.js';
+import {validateUserInfo2} from '../../util/validate.js';
 
 export default function UserInfo() {
     const refs = {
@@ -24,7 +24,7 @@ export default function UserInfo() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if(validateUserInfo(refs)) {
+        if(validateUserInfo2(refs)) {
             console.log('submit ==> ', form);   
         }
     }
