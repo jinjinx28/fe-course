@@ -1,14 +1,13 @@
-import '../components/commons/MenuList.jsx';
-export default function Header() {
-    const menus = [
-        {"href" : "#home", "style" : "header-menu-item", "name" : "Home"},
-        {"href" : "#about", "style" : "header-menu-item", "name" : "About"},
-        {"href" : "#skills", "style" : "header-menu-item", "name" : "Skills"},
-        {"href" : "#work", "style" : "header-menu-item", "name" : "Work"},
-        {"href" : "#testimonial", "style" : "header-menu-item", "name" : "Testimonial"},
-        {"href" : "#contact", "style" : "header-menu-item", "name" : "Contact"},
-    ]
+import Logo from './header/Logo.jsx';
+import MenuList from './commons/MenuList.jsx';
+import ToggleButton from './header/ToggleButton.jsx';
 
+export default function Header({data}) {
+    //data 객체가 존재하는 경우에만 구조분해할당 진행!!
+    // 구조분해 할당으로 반환하는 타입이 객체인 경우
+
+    const [menus] = data || {};
+    
     return(
         <header class="header">
             <Logo img="img/favicon.ico"
@@ -16,20 +15,9 @@ export default function Header() {
                 style="header-logo-img"
                 title="jinjin"
             />
-
-            <MenuList menus={menus} style="header-menu-logo"/>
-        
-            {/* <nav>
-                <ul class="header-menu">
-                    <li><a href="#home" class="header-menu-item">Home</a></li>
-                    <li><a href="#about" class="header-menu-item">About</a></li>
-                    <li><a href="#skils" class="header-menu-item">Skills</a></li>
-                    <li><a href="#work" class="header-menu-item">My Work</a></li>
-                    <li><a href="#testimonial" class="header-menu-item">Testimonial</a></li>
-                    <li><a href="#contact" class="header-menu-item">Contact</a></li>
-                </ul>
-            </nav> */}
-            <button class="header-toggle"><i class="fa-solid fa-bars"></i></button>
+            
+            <MenuList menus={menus} style="header-menu-open"/>
+            <ToggleButton />
         </header>
     )
 }
