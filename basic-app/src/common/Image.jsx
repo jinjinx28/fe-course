@@ -4,10 +4,11 @@ export default function Image({img, alt, w, h, className}) {
         <img src={img} 
             alt={alt}
             style={{
-                w : w,
-                h : h
+                
+                width : w || undefined, 
+                height : h || undefined
             }}
-            className={className}
+            className={className} 
         />
     )
 }
