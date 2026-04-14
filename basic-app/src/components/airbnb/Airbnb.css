@@ -2,12 +2,19 @@
     margin: 0px;
     padding: 0px;
 }
+.room_list_wrapper {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 20px;       
+    padding: 20px;
+}
 .room_container {
     padding: 10px 0;
-    position: relative;
-    width:220px;
     border: 1px solid gray;
+    position: relative;
+    width: 220px;
     text-align: center;
+    flex-shrink: 0;      
 }
 .room_title, .room_date, .room_price {
     font-size: 0.8rem;
@@ -20,7 +27,9 @@
 }
 .room_price {
     display: flex;
-    gap: 10px
+    gap: 10px;
+    justify-content: space-between; 
+    padding-right: 10px;
 }
 .room_img {
     width:200px;
