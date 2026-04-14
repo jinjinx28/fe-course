@@ -4,8 +4,8 @@ export default function Image({img, alt, w, h, className}) {
             alt={alt}
             style={{
                 
-                width : "300px", 
-                height : "250px",
+                width : w ? w : undefined, 
+                height : h ? h : undefined
             }}
             className={className} 
         />
