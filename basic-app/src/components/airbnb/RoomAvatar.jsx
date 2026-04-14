@@ -1,12 +1,10 @@
 import Image from "../../common/Image.jsx";
 import "./Airbnb.css";
 
-export default function RoomAvatar({item, key}) {
-    const {
-            img, roomTitle, roomDate, roomPrice, roomRating, isLike, isGuest
-        } = item;
+export default function RoomAvatar({ img, roomTitle, roomDate, roomPrice, roomRating, isGuest, isLike }) {
+
     return(
-        <div className="room_container" key={key}>
+        <div className="room_container"> 
             <Image  img= {img}
                     alt="best room"
                     className="room_img" />
