@@ -1,12 +1,11 @@
-
 export default function Image({img, alt, w, h, className}) {
     return(
         <img src={img} 
             alt={alt}
             style={{
                 
-                width : w || undefined, 
-                height : h || undefined
+                width : "300px", 
+                height : "250px",
             }}
             className={className} 
         />

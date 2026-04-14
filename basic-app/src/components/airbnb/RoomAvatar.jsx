@@ -1,23 +1,22 @@
 import Image from "../../common/Image.jsx";
-import "./Airbnb.css"
+import "./Airbnb.css";
 
-export default function RoomAvatar({img, roomTitle, roomDate, roomPrice, roomRating, isGuest, isLike}) {
-    
-    return (
-        <div className="room_container">
-            <Image img={img} 
-                    alt="Room Image"
+export default function RoomAvatar({item, key}) {
+    const {
+            img, roomTitle, roomDate, roomPrice, roomRating, isLike, isGuest
+        } = item;
+    return(
+        <div className="room_container" key={key}>
+            <Image  img= {img}
+                    alt="best room"
                     className="room_img" />
-                
-            <span className="guest_preference">게스트 선호</span>
-            <span className="like">🤍</span>
-
+            {isGuest && <span className="guest_preference">게스트 선호</span>}
+            {isLike && <span className="like">🤍</span>}
             <p className="room_title">{roomTitle}</p>
             <p className="room_date">{roomDate}</p>
-
             <div className="room_price">
-                <p>총액 : {roomPrice}</p>
-                <p>🌟{roomRating}</p>
+                <p>총액 {roomPrice}</p>
+                <p>⭐ {roomRating}</p>
             </div>
         </div>
     )
