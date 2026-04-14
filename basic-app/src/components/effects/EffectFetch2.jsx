@@ -7,12 +7,17 @@ export default function EffectFetch2() {
     const [data, setData] = useState([]);
     useEffect(() => {
         // 비동기 함수 fetchData 작성 및 호출
-        const fetchData2 = async () => {
-            const jsonData = await fetchData("http://localhost:5173/data/list.json");  
-            setData(jsonData);
+        const loadData = async () => {
+            const jsonData = await fetchData("http://localhost:5173/data/avatar.json");  
+            const newList = jsonData.list.map((item) => ({
+                ...item,
+                style : style.avatar_img_circle
+            })); 
+            // console.log(newList);
+            setData(newList);
         }
 
-        fetchData2();
+        loadData();
 
         // fetch("http://localhost:5173/data/list.json")
         //     .then((response) => response.json())
@@ -25,7 +30,7 @@ export default function EffectFetch2() {
 
     return (
         <>
-            {/* <AvatarImageList imgList={list}/> */}
+            <AvatarImageList imgList={data}/>
         </>
     )
 }
