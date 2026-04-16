@@ -5,6 +5,7 @@ import Header from './components/Header.jsx';
 import Content from './components/Content.jsx';
 import Footer from './components/Footer.jsx';
 
+
 export default function App() {
   const [data, setData] = useState({});
   useEffect(()=>{
@@ -22,7 +23,7 @@ export default function App() {
     <>
       <Header data={data?.header} />
       <Content data={data?.content}/>
-      <Footer />
+      <Footer data={data?.footer}/>
     </>
   )
 }

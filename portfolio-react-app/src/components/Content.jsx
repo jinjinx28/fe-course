@@ -3,6 +3,7 @@ import About from "./content/About.jsx"
 import Skills from "./content/Skills.jsx"
 import Work from "./content/Work.jsx"
 import Testimonials from "./content/Testimonials.jsx"
+import ArrowTop from "./content/ArrowTop.jsx"
 
 export default function Content({ data }) {
     // console.log('Content :: data :: ', data);    
@@ -13,6 +14,7 @@ export default function Content({ data }) {
             <Skills data={data?.skills}/>
             <Work data={data?.work}/>
             <Testimonials data={data?.testimonials}/>
+            <ArrowTop />
         </>
     )
 }
