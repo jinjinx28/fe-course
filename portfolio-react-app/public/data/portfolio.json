@@ -1,7 +1,7 @@
 {
     "header": {
         "logo": {
-            "img": "images/favicon.ico",
+            "img": "img/favicon.ico",
             "name": "Judy"
         },
         "menus": [
@@ -15,7 +15,7 @@
     },
     "content": {
         "home": {
-            "img": "images/favicon.ico",
+            "img": "img/favicon.ico",
             "alt": "photo",
             "title": "Junior Developer",
             "name": "Judy",
@@ -31,12 +31,12 @@
                 {"icon": "server", "title": "Back-end", "subjects": "Java, JavaScript, Go, Kotlin, Spring, Spring Boot"}
             ],
             "jobs": [
-                {   "img":"images/jobs/google.png", 
+                {   "img":"img/jobs/google.png", 
                     "alt":"google", 
                     "name":"Google as Junior Software Engineer", 
                     "period":"2019 Oct - Until now"
                 },
-                {   "img":"images/jobs/samsung.png", 
+                {   "img":"img/jobs/samsung.png", 
                     "alt":"samsung", 
                     "name":"Samsung as Junior Software Engineer", 
                     "period":"2010 Oct - 2019 Oct"
@@ -71,55 +71,78 @@
             ],
             "projects" : [
                 {
-                    "img" : "images/projects/project1.webp",
+                    "img" : "img/projects/project1.webp",
                     "alt" : "project-img",
                     "title" : "Project#1",
                     "description" : "Clone Coding with HTML, CSS"
                 },
                 {
-                    "img" : "images/projects/project2.webp",
+                    "img" : "img/projects/project2.webp",
                     "alt" : "project-img",
                     "title" : "Project#2",
                     "description" : "Clone Coding with HTML, CSS"
                 },
                 {
-                    "img" : "images/projects/project3.webp",
+                    "img" : "img/projects/project3.webp",
                     "alt" : "project-img",
                     "title" : "Project#3",
                     "description" : "Clone Coding with HTML, CSS"
                 },
                 {
-                    "img" : "images/projects/project4.webp",
+                    "img" : "img/projects/project4.webp",
                     "alt" : "project-img",
                     "title" : "Project#4",
                     "description" : "Clone Coding with HTML, CSS"
                 },
                 {
-                    "img" : "images/projects/project5.webp",
+                    "img" : "img/projects/project5.webp",
                     "alt" : "project-img",
                     "title" : "Project#5",
                     "description" : "Clone Coding with HTML, CSS"
                 },
                 {
-                    "img" : "images/projects/project6.webp",
+                    "img" : "img/projects/project6.webp",
                     "alt" : "project-img",
                     "title" : "Project#6",
                     "description" : "Clone Coding with HTML, CSS"
                 },
                 {
-                    "img" : "images/projects/project7.webp",
+                    "img" : "img/projects/project7.webp",
                     "alt" : "project-img",
                     "title" : "Project#7",
                     "description" : "Clone Coding with HTML, CSS"
                 },
                 {
-                    "img" : "images/projects/project1.webp",
+                    "img" : "img/projects/project1.webp",
                     "alt" : "project-img",
                     "title" : "Project#8",
                     "description" : "Clone Coding with HTML, CSS"
                 }
             ]
-        }
+        },
+        "testimonials" :[
+            {
+                "img": "img/testimonials/people1.webp",
+                "alt": "people1",
+                "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit.Lorem ipsum, dolor sit amet consectetur adipisicing elit",
+                "name": "James",
+                "company": "Samsung"
+            },
+            {
+                "img": "img/testimonials/people2.webp",
+                "alt": "people2",
+                "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit.Lorem ipsum, dolor sit amet consectetur adipisicing elit",
+                "name": "Smith",
+                "company": "Google"
+            },
+            {
+                "img": "img/testimonials/people3.webp",
+                "alt": "people3",
+                "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit.Lorem ipsum, dolor sit amet consectetur adipisicing elit",
+                "name": "Anne",
+                "company": "Samsung"
+            }
+        ]
     },
     "footer":{}
 }

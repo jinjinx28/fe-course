@@ -1,4 +1,4 @@
-import { Title, SubTitle, TitleDescription } from "../commons/Title.jsx"
+import { Title, SubTitle, TitleDescription } from "../commons/Titles.jsx"
 import SkillsContent from "./SkillsContent.jsx";
 
 export default function Skills({ data }) {
