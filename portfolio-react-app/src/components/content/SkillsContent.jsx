@@ -1,7 +1,7 @@
 import React from 'react';
 import Article from './Article.jsx';
 import SkillsTitle from './SkillsTitle.jsx';
-import SkillsCoding from './SkillsCoding.jsx';
+import SkillsCoding from './SkillCoading.jsx';
 import SkillsTools from './SkillsTools.jsx';
 
 export default function SkillsContent({skills}) {

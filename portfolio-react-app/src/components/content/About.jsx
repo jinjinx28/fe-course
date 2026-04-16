@@ -1,4 +1,4 @@
-import { Title, Description } from "../commons/Titles.jsx"
+import { Title, Description } from "../commons/Title.jsx"
 import Majors from "./Majors.jsx";
 import Jobs from "./Jobs.jsx";
 
