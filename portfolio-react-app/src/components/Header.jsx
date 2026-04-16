@@ -8,11 +8,11 @@ export default function Header({ data }) {
     const { menus = [] } = data || {};  
 
     return (
-        <header class="header">
-            <Logo   img="/images/favicon.ico"
+        <header className="header">
+            <Logo   img={data?.logo?.img}
                     alt="header-logo"
                     style="header-logo-img"
-                    title="Judy"
+                    title={data?.logo?.name}
             />
             <MenuList menus={menus} style="header-menu open" />
             <ToggleButton />

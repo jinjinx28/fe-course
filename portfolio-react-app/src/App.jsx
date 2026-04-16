@@ -15,11 +15,15 @@ export default function App() {
     loadData();
   }, []);
 
+  console.log("data :: ", data);
+  
+
   return (
     <>
       <Header data={data?.header} />
-      <Content />
+      <Content data={data?.content}/>
       <Footer />
     </>
   )
 }
+
