@@ -1,6 +1,6 @@
 import React from 'react';
-import { Title, SubTitle } from '../commons/Titles.jsx';
-import Testimonial from './Testimonial.jsx';
+import { Title, SubTitle } from '../components/commons/Titles.jsx';
+import Testimonial from '../components/content/Testimonial.jsx';
 import { useOutletContext } from 'react-router-dom';
 
 export default function Testimonials() {

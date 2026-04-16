@@ -1,5 +1,5 @@
-import { Title, SubTitle, TitleDescription } from "../commons/Titles.jsx"
-import SkillsContent from "./SkillsContent.jsx";
+import { Title, SubTitle, TitleDescription } from "../components/commons/Titles.jsx"
+import SkillsContent from "../components/content/SkillsContent.jsx";
 import { useOutletContext } from "react-router-dom";
 
 export default function Skills() {

@@ -1,7 +1,7 @@
 import React from 'react';
-import {Title, SubTitle} from '../commons/Titles.jsx';
-import Categories from './Categories.jsx';
-import Projects from './Projects.jsx';
+import {Title, SubTitle} from '../components/commons/Titles.jsx';
+import Categories from '../components/content/Categories.jsx';
+import Projects from '../components/content/Projects.jsx';
 import { useOutletContext } from 'react-router-dom';
 
 export default function Work() {

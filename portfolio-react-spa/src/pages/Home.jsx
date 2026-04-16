@@ -1,5 +1,5 @@
-import AvatarImage from "../commons/AvatarImage.jsx"
-import Menu from "../commons/Menu.jsx"
+import AvatarImage from "../components/commons/AvatarImage.jsx"
+import Menu from "../components/commons/Menu.jsx"
 import { useOutletContext } from "react-router-dom";
 
 export default function Home() {  
