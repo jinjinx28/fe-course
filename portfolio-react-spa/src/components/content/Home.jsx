@@ -1,8 +1,11 @@
 import AvatarImage from "../commons/AvatarImage.jsx"
 import Menu from "../commons/Menu.jsx"
+import { useOutletContext } from "react-router-dom";
 
-export default function Home({ data }) {  
-    const { img, alt, title, name, description, href, menuName } = data || {};
+export default function Home() {  
+    const data = useOutletContext();  //content 객체 전체
+
+    const { img, alt, title, name, description, href, menuName } = data?.home || {};
     return (
         <section id="home">
             <AvatarImage img={img}
