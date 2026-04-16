@@ -6,7 +6,6 @@ import Testimonials from "./content/Testimonials.jsx"
 import ArrowTop from "./content/ArrowTop.jsx"
 
 export default function Content({ data }) {
-    // console.log('Content :: data :: ', data);    
     return(
         <>
             <Home data={data?.home}/>
