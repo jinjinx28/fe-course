@@ -7,7 +7,7 @@ export default function Logo({img, alt, style, title}) {
                     img={img}
                     alt={alt}
                     style={style} />
-            <h1 className="header-logo-title">{title}</h1>
+            <h1 className="header-logo-title">{title}::SPA</h1>
         </div>
     )
 }
