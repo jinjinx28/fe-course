@@ -1,5 +1,5 @@
 import React from 'react';
-import { setLike } from '../../features/likeSlice.js';
+import { increment, decrement } from '../../features/likeSlice.js';
 import { useDispatch, useSelector } from 'react-redux';
 
 export default function Modal({ project, onClose }) {
@@ -17,7 +17,9 @@ export default function Modal({ project, onClose }) {
                 <p>{project.description}</p>
                 <h3>
                     <button className="modal-like-button"
-                            onClick={() => {dispatch(setLike())}}>❤쭈아요</button>
+                            onClick={() => {dispatch(setLike(project))}}>❤쭈음</button>
+                    <button className="modal-like-button"
+                            onClick={() => {}}>💢싫음</button>
                 </h3>
             </div>
         </div>
