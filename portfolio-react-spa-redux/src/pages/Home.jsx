@@ -1,8 +1,10 @@
 import AvatarImage from "../components/commons/AvatarImage.jsx"
 import Menu from "../components/commons/Menu.jsx"
 import { useOutletContext } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function Home() {  
+    const likeCount = useSelector((state) => state.like.count);
     const {data} = useOutletContext();  //content 객체 전체
 
     const { img, alt, title, name, description, href, menuName } = data?.home || {};
@@ -20,7 +22,7 @@ export default function Home() {
             <Menu   href={href}
                     style="home-contact"
                     name={menuName} />
-            <h2 style={{color:'pink'}}>❤쪼아요[]</h2>
+            <h2 style={{color:'pink'}}>❤쪼아요[{likeCount}]</h2>
         </section>
     )
 }

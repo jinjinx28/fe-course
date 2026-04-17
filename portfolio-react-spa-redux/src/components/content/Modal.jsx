@@ -1,6 +1,10 @@
 import React from 'react';
+import { setLike } from '../../features/likeSlice.js';
+import { useDispatch, useSelector } from 'react-redux';
 
-export default function Modal({ project, onClose, like, setLike }) {
+export default function Modal({ project, onClose }) {
+    const dispatch = useDispatch();
+    const like = useSelector((state) => state.like.value);
     return (
         <div className="modal-overlay" onClick={onClose}>
             <div 
@@ -13,7 +17,7 @@ export default function Modal({ project, onClose, like, setLike }) {
                 <p>{project.description}</p>
                 <h3>
                     <button className="modal-like-button"
-                            onClick={()=> setLike(like+1)}>❤좋아요</button>
+                            onClick={() => {dispatch(setLike())}}>❤쭈아요</button>
                 </h3>
             </div>
         </div>

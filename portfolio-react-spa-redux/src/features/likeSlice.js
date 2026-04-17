@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    count:100, 
+    count:0, 
 }
 
 export const likeSlice = createSlice({
@@ -9,7 +9,7 @@ export const likeSlice = createSlice({
   initialState,
   reducers: {
     setLike: (state) => {
-      state.like += 1
+      state.count += 1
     },
   },
 })

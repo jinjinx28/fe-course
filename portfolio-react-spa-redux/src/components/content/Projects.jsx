@@ -30,8 +30,6 @@ export default function Projects({ projects, like, setLike }) {
                 <Modal 
                     project={selectedProject}
                     onClose={()=> setSelectedProject(null)}
-                    like={like}
-                    setLike={setLike}
                 />  
             }
         </>
