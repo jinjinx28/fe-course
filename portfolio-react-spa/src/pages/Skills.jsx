@@ -3,7 +3,7 @@ import SkillsContent from "../components/content/SkillsContent.jsx";
 import { useOutletContext } from "react-router-dom";
 
 export default function Skills() {
-    const data = useOutletContext();
+    const {data} = useOutletContext();
     return (
         <section id="skills" className="section container">
             <Title title="My Skills" />

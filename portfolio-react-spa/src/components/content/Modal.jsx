@@ -1,7 +1,6 @@
 import React from 'react';
 
-export default function Modal({ project, onClose}) {
-    
+export default function Modal({ project, onClose, like, setLike }) {
     return (
         <div className="modal-overlay" onClick={onClose}>
             <div 
@@ -13,8 +12,8 @@ export default function Modal({ project, onClose}) {
                 <img src={project.img} alt={project.alt} />
                 <p>{project.description}</p>
                 <h3>
-                    <button className='modal-like-button'
-                            onClick={() => alert("좋아요 버튼 클릭 !!")}>좋아요❤</button>
+                    <button className="modal-like-button"
+                            onClick={()=> setLike(like+1)}>❤좋아요</button>
                 </h3>
             </div>
         </div>

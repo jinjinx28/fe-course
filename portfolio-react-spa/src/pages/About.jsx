@@ -4,7 +4,7 @@ import Jobs from "../components/content/Jobs.jsx";
 import { useOutletContext } from "react-router-dom";
 
 export default function About() {
-    const data = useOutletContext();
+    const {data} = useOutletContext();
     return (
         <section id="about" className="section container">
             <Title title="About me" />
