@@ -20,6 +20,7 @@ export default function Home() {
             <Menu   href={href}
                     style="home-contact"
                     name={menuName} />
+            <h2 style={{color:'pink'}}>❤쪼아요[]</h2>
         </section>
     )
 }

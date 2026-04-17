@@ -1,9 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    count:0, 
+    count:100, 
 }
-
 
 export const likeSlice = createSlice({
   name: 'like',
@@ -16,5 +15,4 @@ export const likeSlice = createSlice({
 })
 
 export const { setLike } = likeSlice.actions
-
 export default likeSlice.reducer
