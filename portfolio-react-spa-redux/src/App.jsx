@@ -6,7 +6,7 @@ import Footer from './components/Footer.jsx';
 import { Outlet } from 'react-router-dom';
 
 export default function App() {
-  const [like, setLike] = useState(0);
+  // const [like, setLike] = useState(0);
   const [data, setData] = useState({});  
   useEffect(()=>{
     const loadData = async() => {
@@ -18,8 +18,7 @@ export default function App() {
   
   return (
     <>
-      <Header data={data?.header}
-              like={like} />
+      <Header data={data?.header} />
       <Outlet context={{ data: data?.content, like, setLike }}/> 
       <Footer data={data?.footer} />
     </>
