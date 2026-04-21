@@ -349,6 +349,87 @@ select *
 from employee
 where salary between 6000 and 8000;
 
+/***********************************************
+    특정 범위 액세스 (논리합) : IN (값1, 값2, 값3 ..)
+    형식 > SELECT [컬럼리스트]
+		  FROM [테이블]
+          WHERE [컬럼명] IN (값1, 값2, 값3 ..)
+***********************************************/
+
+-- 사원명이 '오삼식', '김삼순', '일지매' 사원들을 조회
+select *
+from employee
+where emp_name in ('오삼식', '김삼순', '일지매');
+
+/* where emp_name = '오삼식'
+	  or emp_name = '김삼순'
+      or emp_name = '일지매';
+*/
+
+-- 부서 아이디가 MKT, SYS, STG에 속한 모든 사원 조회
+select *
+from employee
+where dept_id in ('MKT', 'SYS', 'STG')
+order by dept_id;
+
+/*********************************************************
+    특정 문자열 검색 : 와일드 문자 (%, _) + LIKE
+					%(전체), _(한글자)
+    형식 > SELECT [컬럼리스트]
+		  FROM [테이블]
+          WHERE [컬럼명] LIKE '검색 데이터 (와일드 문자 포함)'
+*********************************************************/
+
+-- '한'씨 성을 가진 모든 사원을 조회
+select *
+from employee
+where emp_name like '한%';
+
+-- 영어 이름이 'f'로 시작하는 모든 사원을 조회
+select *
+from employee
+where eng_name like 'f%';
+
+-- 이메일 두번째 자리에 'a'가 들어가는 모든 사원들을 조회
+select *
+from employee
+where email like '_a%';
+
+-- 이메일 아이디가 4자인 모든 사원들을 조회
+select *
+from employee
+where email like '____@%';
+
+-- 부서 아이디에 'A'가 들어가는 모든 사원들을 조회
+select *
+from employee
+where dept_id like '%A%';
+
+/***********************************************
+		내장함수 : 숫자함수, 문자함수, 날짜함수
+		호출되는 위치 - [컬럼명],[조건절의 컬럼명]
+***********************************************/
+
+-- [숫자함수]
+-- 함수 실습을 위한 테이블 : DUAL
+
+-- 1) 절대값 : abs(숫자)
+select abs(100), abs(-100), 100,-100
+from dual; 
+
+-- 2) 소수점 절삭 : floor(숫자), turncate(숫자, 자릿수)
+select floor(123.456), truncate(123.456, 0), truncate(123.456, 2)
+from dual;
+
+-- 사원테이블의 sys 부서 사원들의 사번, 사원명, 부서아이디, 폰번호, 급여
+-- 보너스 (급여의 25%) 컬럼을 추가하여 조회, 보너스는 소수점 1자리 출력
+select emp_id, emp_name, dept_id, phone, salary, truncate(salary*0.25, 1) as bonus
+from employee
+where dept_id = 'SYS';
+
+-- 3) rand() : 임의의 난수를 발생시키는 함수 (0 ~ 1)
+select rand() from dual;
+
 
 
 
