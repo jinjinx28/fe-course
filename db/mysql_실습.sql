@@ -508,6 +508,82 @@ where left(hire_date, 4) between '2015' and '2017';
 select emp_id, emp_name, hire_date, right(phone, 4) as phone, salary
 from employee;
 
+-- (4) upper(문자열), lower(문자열) : 대, 소문자로 치환
+select upper ('nyong&nuri') as upper, lower('nyong&nuri') as lower from dual;
+
+-- 사번, 사원명, 영어이름, 부서아이디, 이메일, 급여를 조회
+-- 영어 이름은 대문자, 부서 아이디는 소문자, 이메일은 대문자
+select emp_id, 
+		emp_name, 
+        upper(eng_name) as eng_name, 
+        lower(dept_id) as dept_id, 
+        upper(email) as email, 
+        salary
+from employee;
+
+-- (5) trim(문자열) : 앞, 뒤 공백 제거
+select trim('     뇽누리') as t1,
+		trim('뇽누리    ') as t2,
+        trim('  뇽누리  ') as t3,
+        trim('  뇽  누리  ') as t4
+from dual;
+
+-- (6) format (문자열, 소수점자리) : 문자열 포맷 - 3자리 콤마 구분
+select format(123456, 0) as format1, 
+		format(123456, 0) as format2
+from dual;
+
+/*
+	사번, 사원명, 입사일, 폰번호, 급여, 보너스(급여의 20%)를 조회
+    급여, 보너스는 소수점 없이 3자리 콤마로 구분하여 출력
+    급여가 null인 경우에는 기본값 0
+    2016년부터 2017년 사이에 입사한 사원
+    사번 기준으로 내림차순 정렬
+*/
+select emp_id, 
+		emp_name, 
+        hire_date, 
+        phone,
+        concat(format(ifnull(salary, 0), 0), '원') as salary, 
+        format(salary*0.2, 0) as bonus
+from employee
+where left(hire_date, 4) between '2016' and '2017'
+order by emp_id desc;
+
+-- [날짜 함수]
+-- curdate() : 년-월-일 형식으로 현재 날짜 출력
+-- sysdate(), now() : 년-월-일-시-분-초 형식으로 현재 날짜 출력
+
+-- convert(변환값 as 데이터타입)  :: MYSOL OLD
+select 123 as number, cast(123 as char) as str from dual;
+
+select '20260421' as str,
+	cast('1234' as signed integer) as number 
+from dual;
+
+select '20260421' as str,
+	cast('20260421' as date) as date1 
+from dual;
+
+-- now()
+select now() as date,
+		cast(now() as char) as string,
+		cast(cast(now() as char) as date) as date
+from dual;
+
+-- signed integer, unsigned integer, decimal
+select '0930' as string,
+		cast('0930' as signed integer) as cast_int,
+        cast('0930' as unsigned integer) as cast_int,
+        cast('0930' as decimal(10, 2)) as cast_decimal
+from dual;
+
+
+
+
+
+
+
 
 
 
