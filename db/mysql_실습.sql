@@ -430,9 +430,83 @@ where dept_id = 'SYS';
 -- 3) rand() : 임의의 난수를 발생시키는 함수 (0 ~ 1)
 select rand() from dual;
 
+-- 정수 3자리 (0 ~ 999) 사이의 난수 발생
+select floor (rand() * 1000) as number from dual;
 
+-- 정수 4자리(0 ~ 9999) 사이의 난수 발생, 소수점 2자리
+select truncate (rand() * 10000, 2) as number from dual;
 
+-- 4) mod (숫자, 나누는 숫자) : 나머지 함수
+select mod(123, 2) as odd, mod(124, 2) as even from dual;
 
+-- 3자리 수를 랜덤으로 발생시켜, 2로 나누어 홀수, 짝수 구분
+select mod(floor((rand() * 1000)+1), 2) as result from dual;
+
+-- [문자함수]
+-- (1) concat (문자열1, 문자열2) : 문자열 결합 함수
+select concat ('하이룽', '누리', '고냐니입니다') as '세상에서 제일 귀여운'from dual;
+
+-- 사원테이블의 사원번호, 사원명, 사원명2 컬럼을 생성하여 조회
+-- 사원명2 컬럼을 데이터 형식 : ex ) S0001(진진)
+select emp_id, emp_name, concat(emp_id, '(', emp_name, ')') as emp_name2
+from employee;
+
+/*
+	사번, 사원명, 영어이름, 입사일, 폰번호, 급여를 조회
+    영어 이름의 출력 형식을 '진진/jinjin' 타입으로 출력
+    영어 이름이 null인 경우에는 'smith'를 기본으로 조회
+*/
+select emp_id, 
+		emp_name, 
+        eng_name, concat(emp_name, '/', ifnull(eng_name, 'smith')) as eng_name2,
+        hire_date, 
+        phone, 
+        salary
+from employee;
+
+-- (2) substring (문자열, 위치, 갯수) : 문자열 추출, 공백도 문자열 포함
+select
+    substring('뇽나디의 누리', 1, 3) as nyong,
+    substring('뇽나디의 누리', 5, 7) as nyong2
+from dual;
+
+-- 사원테이블의 사번, 사원명, 입사년도, 입사월, 입사일, 급여를 조회
+select emp_id, 
+		emp_name, 
+		substring(hire_date, 1, 4) as year,
+		substring(hire_date, 6, 2) as month,
+		substring(hire_date, 9, 2) as day,
+        salary
+from employee;
+
+-- 2015년도 입사한 모든 사원 조회
+select *
+from employee
+where substring(hire_date, 1, 4) = '2015';
+
+-- 2018년도에 입사한 정보시스템(sys) 부서 사원 조회
+select *
+from employee
+where substring(hire_date, 1, 4) = '2018' and dept_id='sys';
+
+-- (3) lefr(문자열, 갯수), right(문자열, 갯수) : 왼쪽, 오른쪽 기준 문자열 추출
+select left(curdate(), 4) as year,
+		substring(curdate(), 6, 2) as month,
+		right(curdate(), 2) as day from dual;
+
+-- 2018년도 입사한 모든 사원 조회
+select *
+from employee
+where left(hire_date, 4) = '2018';
+
+-- 2015년부터 2017년 사이에 입사한 모든 사원 조회
+select *
+from employee
+where left(hire_date, 4) between '2015' and '2017';
+
+-- 사원번호, 사원명 입사일, 폰번호, 급여를 조회 ( 폰번호는 마지막 4자리만 출력 )
+select emp_id, emp_name, hire_date, right(phone, 4) as phone, salary
+from employee;
 
 
 
