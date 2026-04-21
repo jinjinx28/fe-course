@@ -282,6 +282,82 @@ from employee
 where dept_id = 'SYS'
 order by 입사일 asc, 급여 desc;
 
+show databases;
+use hrdb2019;
+select database();
+show tables;
+select * from employee;
+
+/***********************************************
+    조건절 + 비교연산자 : 특정 범위 혹은 데이터 검색
+    형식 > SELECT [컬럼리스트]
+		  FROM [테이블]
+          WHERE [컬럼명] [비교연산자] [값]
+          ORDER BY [컬럼명, ..] ASC / DESC
+***********************************************/
+
+-- 급여가 5000 이상인 사원들을 조회, 급여를 오름차순으로 정렬
+select *
+from employee
+where salary >= 5000
+order by salary asc;
+
+-- 입사일이 '2017-01-01' 이후인 사원들을 조회
+select *
+from employee
+where hire_date > '2017-01-01'
+order by hire_date;
+
+-- 입사일이 2015-01-01 이후이거나, 급여가 6000 이상인 사원들을 조회
+-- ~ 또는, ~ 이거나 : OR - 두 개의 조건 중 하나만 만족해도 조회
+select *
+from employee
+where hire_date > '2015-01-01' or salary >= 6000;
+
+-- 입사일이 2015-01-01 이후이고, 급여가 6000 이상인 사원들을 조회
+-- ~ 이고 : AND - 두 개의 조건 모두 만족해야만 조회
+select *
+from employee
+where hire_date > '2015-01-01' and salary >= 6000;
+
+-- 특정 범위 : 2015-01-01 ~ 2017-12-31 사이에 입사한 모든 사원 조회
+select *
+from employee
+where hire_date >= '2015-01-01' and hire_date <= '2017-12-31';
+
+-- 급여가 6000 이상 8000 이하인 모든 사원들을 조회
+select *
+from employee
+where salary >= 6000 and salary <= 8000;
+
+
+/***********************************************
+    특정 범위 액세스 (논리곱) : BETWEEN ~ AND
+    특정 범위 액세스 (논리곱) : BETWEEN ~ AND
+    형식 > SELECT [컬럼리스트]
+		  FROM [테이블]
+          WHERE [컬럼명] BETWEEN [값1] AND [값2]
+***********************************************/
+
+-- 특정 범위 : 2015-01-01 ~ 2017-12-31 사이에 입사한 모든 사원 조회
+select *
+from employee
+where hire_date between '2015-01-01' and '2017-12-31';
+
+-- 급여가 6000 이상 8000 이하인 모든 사원들을 조회
+select *
+from employee
+where salary between 6000 and 8000;
+
+
+
+
+
+
+
+
+
+
 
 
 
