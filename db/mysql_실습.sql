@@ -1158,20 +1158,72 @@ order by sum(ifnull(v.duration, 0)) desc;
 						=> (쿼리작성) 괄호 안에 쿼리를 작성하여 메인 쿼리에 추가
         형식 > SELECT [컬럼리스트 추가 => (스칼라 서브쿼리)] @오라클 사용 X
 				FROM [테이블명 추가 => (인라인뷰)] 
-                WHERE [조건절 => (서브쿼리)]
+                WHERE [조건절 => (서브쿼리 : 단일행, 다중행)]
 **********************************************************************/
 
--- [서브쿼리]
+-- [서브쿼리 : 단일행 - '='로 비교함]
 -- 정보시스템 부서의 사원들의 사번, 사원명, 입사일, 부서아이디, 급여 조회
 
-select emp_name, hire_date, dept_id, salary
+select emp_id, emp_name, hire_date, dept_id, salary
 from employee
 where dept_id = (select dept_id from department where dept_name = '정보시스템');
 
+select e.emp_id, e.emp_name, e.hire_date, d.dept_id, e.salary
+from employee e, department d 
+where d.dept_name = '정보시스템';
 
+select dept_id
+from department
+where dept_name = '정보시스템';
 
+-- 고소해 사원이 속한 부서 아이디, 부서명, 부서 생성일 조회
+select dept_id from employee where emp_name = '고소해'; -- [서브쿼리 : 단일행]
 
+select dept_id, dept_name, start_date			-- [메인쿼리]
+from department
+where dept_id = (select dept_id from employee where emp_name = '고소해');
 
+-- 서브쿼리 : 단일행
+-- 누구야 사원의 휴가사용 내역을 조회
+select emp_id from employee where emp_name = '안경태';
+
+select vacation_id, 
+		emp_id, 
+        (select emp_name from employee where emp_name = '안경태') as emp_name,
+        begin_date, 
+        end_date, 
+        reason, 
+        duration
+from vacation
+where emp_id = (select emp_id from employee where emp_name = '안경태'); 
+
+-- [서브쿼리 : 단일행 구조]
+-- 제3본부에 속한 모든 부서를 조회
+select unit_id
+from unit
+where unit_name = '제3본부';
+
+select *
+from department
+where unit_id = (select unit_id from unit where unit_name = '제3본부');
+
+-- 서브쿼리 : 단일행
+-- 사원 중 최고 연봉을 받는 사원 정보를 조회
+select max(salary) from employee;
+
+select *
+from employee
+where salary = (select max(salary) from employee);
+
+-- 최근에 입사한 사원의 정보를 조회
+select max(hire_date) from employee;
+
+select *
+from employee
+where hire_date = (select max(hire_date) from employee);
+
+-- 가장 먼저 퇴사한 사람의 정보
+select max(retire_date) from employee;
 
 
 
