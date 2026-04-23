@@ -986,6 +986,56 @@ from unit u inner join department d on u.unit_id = d.unit_id
 where d.dept_name = '영업' and v.reason = '두통';
 
 
+-- 2014년 ~ 2016년까지 입사한 사원들 중에서 퇴사하지 않은 사원들의
+-- 사원 아이디, 사원명, 부서명, 입사일, 소속본부를 조회
+-- 소속본부 기준으로 오름차순으로 정렬
+select e.emp_id, e.emp_name, d.dept_id, e.hire_date, u.unit_name
+from  employee e, department d, unit u
+where e.dept_id = d.dept_id
+		and d.unit_id = u.unit_id
+        and left(hire_date, 4) between '2014' and '2016'
+        and retire_date is null
+order by u.unit_id asc;
+
+select e.emp_id, e.emp_name, d.dept_id, e.hire_date, u.unit_name
+from  employee e inner join department d on d.dept_id = e.dept_id
+			     inner join unit u on d.unit_id = u.unit_id
+where left(hire_date, 4) between '2014' and '2016'
+        and retire_date is null
+order by u.unit_id asc;
+
+-- 부서별 총 급여, 평균 급여, 총 휴가 사용 일수를 조회
+-- 부서명, 부서아이디, 총급여, 평균급여, 휴가사용일수 (평균급여는 소수점 2자리, 총급여는 3자리 구분)
+select d.dept_id as '부서아이디', 
+		d.dept_name as '부서명', 
+        sum(e.salary) as '총급여', 
+        avg(e.salary) as '평균 급여', 
+        sum(v.duration) as '휴가사용일수'
+from employee e, department d, vacation v
+where e.dept_id = d.dept_id 
+	and e.emp_id = v.emp_id
+group by d.dept_id, d.dept_name;
+
+select d.dept_id as '부서아이디', 
+		d.dept_name as '부서명', 
+		concat(format(sum(e.salary), 0), '원') as '총급여', 
+        concat(truncate(avg(e.salary), 2), '원') as '평균 급여', 
+        sum(v.duration) as '휴가사용일수'
+from employee e inner join department d on e.dept_id = d.dept_id
+				inner join vacation v on e.emp_id = v.emp_id
+group by d.dept_id, d.dept_name;
+
+-- 본부별로 그룹핑 후 부서의 휴가사용 일수를 조회
+select u.unit_id, u.unit_name, e.emp_name, sum(v.duration) -- 휴가 사용 일수
+from employee e, department d, unit u, vacation v
+where u.unit_id = d.unit_id 
+		and d.dept_id = e.dept_id
+		and e.emp_id = v.emp_id
+group by u.unit_id, e.emp_id;
+
+
+		
+
 
 
 
