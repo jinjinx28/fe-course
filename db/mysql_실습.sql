@@ -1026,17 +1026,61 @@ from employee e inner join department d on e.dept_id = d.dept_id
 group by d.dept_id, d.dept_name;
 
 -- 본부별로 그룹핑 후 부서의 휴가사용 일수를 조회
-select u.unit_id, u.unit_name, e.emp_name, sum(v.duration) -- 휴가 사용 일수
+select u.unit_id, u.unit_name, d.dept_name, sum(v.duration) -- 휴가 사용 일수
 from employee e, department d, unit u, vacation v
 where u.unit_id = d.unit_id 
 		and d.dept_id = e.dept_id
 		and e.emp_id = v.emp_id
-group by u.unit_id, e.emp_id;
+group by u.unit_id, d.dept_id, e.emp_id;
+
+select u.unit_id, u.unit_name, d.dept_name, sum(v.duration) -- 휴가 사용 일수
+from employee e inner join  department d on d.dept_id = e.dept_id
+				inner join unit u on u.unit_id = d.unit_id  
+                inner join vacation v on e.emp_id = v.emp_id
+group by u.unit_id, d.dept_id, e.emp_id; 
 
 
+-- [OUTER JOIN] 
+-- 오라클 INNER JOIN(EQUI JOIN) 문법에 (+) 코드를 추가하여 사용 (현재 오라클 문법은 mySQL에서 사용 불가)
+-- 형식 1> SELECT [컬럼리스트]
+-- 		 FROM [테이블1] LEFT/RIGHT OUTER JOIN [테이블2]   
+-- 					   ON [테이블1.조인컬럼] = [테이블2.조인컬럼]  
+
+select count(distinct dept_id) from employee; -- 6
+select count(dept_id) from department;  -- 7
+
+select dept_name, unit_id, start_date, dept_id 
+from department
+order by dept_id;
+
+select dept_id, emp_id, emp_name, salary
+from employee
+order by dept_id;
+
+-- 본서별 사원 수 조회
+select d.dept_id, d.dept_name, count(*) as count
+from employee e, department d
+where e.dept_id = d.dept_id
+group by d.dept_id;
 		
+-- LEFT OUTER JOIN : LEFT에 부서 테이블 위치
+-- 부서별 사원수 조회, 전체 부서 출력 !!
+select d.dept_id, d.dept_name, count(emp_id) as '사원 수'
+from department d left outer join employee e 
+		on d.dept_id = e.dept_id
+group by d.dept_id;
 
+-- RIGHT OUTER JOIN : RIGHT에 부서 테이블 위치
+-- 부서별 사원수 조회, 전체 부서 출력 !!
+select d.dept_id, d.dept_name, count(emp_id) as '사원 수'
+from employee e right outer join department d
+		on d.dept_id = e.dept_id
+group by d.dept_id;
 
+-- 모든 부서의 아이디, 부서명, 본부명을 조회
+select d.dept_id, d.dept_name, u.unit_name
+from department d left outer join unit u 
+		on d.unit_id = u.unit_id;
 
 
 
