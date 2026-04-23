@@ -1078,12 +1078,33 @@ from employee e right outer join department d
 group by d.dept_id;
 
 -- 모든 부서의 아이디, 부서명, 본부명을 조회
-select d.dept_id, d.dept_name, u.unit_name
+-- 본부에 속하지 않은 부서는 '계획중'으로 출력
+select d.dept_id, d.dept_name, ifnull(u.unit_name, '준비 중') as unit_name
 from department d left outer join unit u 
 		on d.unit_id = u.unit_id;
 
+-- 본부별, 부서의 휴가사용일수를 조회
+-- 부서의 누락없이 모두 출력    
+select u.unit_id, u.unit_name, d.dept_id, d.dept_name, sum(ifnull(v.duration, 0)) as duration
+from employee e right outer join department d on e.dept_id = d.dept_id
+				left outer join unit u on d.unit_id = u.unit_id
+                left outer join vacation v on e.emp_id = v.emp_id
+group by u.unit_id, d.dept_id
+order by sum(ifnull(v.duration, 0)) desc;
 
-
+-- 2017년부터 2018년도까지 입사한 사원들의 사원명, 입사일, 연봉, 부서명, 본부명 조회
+-- 단, 퇴사한 사원들 제외
+-- 소속본부를 모두 조회
+select e.emp_name,
+		e.hire_date, 
+        e.salary,
+        d.dept_name, 
+        u.unit_name
+from employee e right outer join department d on e.dept_id = d.dept_id
+				left outer join unit u on d.unit_id = u.unit_id
+                and e.hire_date between '2017-01-01' and '2018-12-31'
+where e.retire_date is null;
+		
 
 
 
