@@ -1105,6 +1105,75 @@ from employee e right outer join department d on e.dept_id = d.dept_id
                 and e.hire_date between '2017-01-01' and '2018-12-31'
 where e.retire_date is null;
 		
+select  e.emp_name,
+		e.hire_date,
+        e.salary,
+        d.dept_name,
+        u.unit_name
+from (select emp_name, hire_date, salary, dept_id
+		from employee 
+		where retire_date is null) e right outer join department d 
+									on e.dept_id = d.dept_id
+									left outer join unit u 
+                                    on d.unit_id = u.unit_id
+where left(hire_date, 4) between '2017' and '2018';    -- 17  
+
+-- [SELF JOIN] : 자신의 테이블을 조인
+-- SELF JOIN은 서브쿼리 형식으로 변환하여 사용됨
+
+-- 형식 1 > SELECT [컬럼리스트]
+-- 			FROM [테이블원본] LEFT/RIGHT JOIN [테이블사본] on [테이블원본.조인컬럼] = [테이블사본.조인컬럼]
+
+-- 형식 2 > SELECT [컬럼리스트]
+-- 			FROM [테이블원본], [테이블사본]
+-- 			WHERE [테이블원본.조인컬럼] = [테이블사본.조인컬럼]
+
+
+select *
+from employee e1, employee e2
+where e1.emp_id = e2.emp_id;
+
+select *
+from employee e1 left join employee e2 on e1.emp_id = e2.emp_id;
+
+-- 본부별, 부서의 휴가사용일수를 조회
+-- 부서의 누락없이 모두 출력    
+explain analyze
+select u.unit_id, u.unit_name, d.dept_id, d.dept_name, sum(ifnull(v.duration, 0)) as duration
+from employee e right outer join department d on e.dept_id = d.dept_id
+				left outer join unit u on d.unit_id = u.unit_id
+                left outer join vacation v on e.emp_id = v.emp_id
+group by u.unit_id, d.dept_id
+order by sum(ifnull(v.duration, 0)) desc;
+
+/* 
+-> Sort: duration DESC  (actual time=0.408..0.409 rows=7 loops=1)
+     -> Table scan on <temporary>  (actual time=0.391..0.392 rows=7 loops=1)
+         -> Aggregate using temporary table  (actual time=0.39..0.39 rows=7 loops=1)
+             -> Nested loop l...
+*/
+
+/**********************************************************************
+		서브쿼리 (SubQuery) : 메인 쿼리에 다른 쿼리를 추가하여 실행하는 방식
+						=> (쿼리작성) 괄호 안에 쿼리를 작성하여 메인 쿼리에 추가
+        형식 > SELECT [컬럼리스트 추가 => (스칼라 서브쿼리)] @오라클 사용 X
+				FROM [테이블명 추가 => (인라인뷰)] 
+                WHERE [조건절 => (서브쿼리)]
+**********************************************************************/
+
+-- [서브쿼리]
+-- 정보시스템 부서의 사원들의 사번, 사원명, 입사일, 부서아이디, 급여 조회
+
+select emp_name, hire_date, dept_id, salary
+from employee
+where dept_id = (select dept_id from department where dept_name = '정보시스템');
+
+
+
+
+
+
+
 
 
 
