@@ -1619,11 +1619,124 @@ create table emp(
 show tables;
 desc emp;
 
+select * 
+from information_schema.tables
+where table_schema = 'hrdb2019';
 
+/*************************************
+	테이블 삭제
+    형식 > DROP TABLE	[테이블명];
+*************************************/
 
+show tables;
 
+select *
+from information_schema.tables
+where table_name = 'emp';
 
-  
+drop table emp;
+
+/*************************************
+	테이블 복제 (CAS)
+    형식 > CREATE TABLE [테이블명]
+		  AS [서브쿼리];
+*************************************/
+
+-- 2016년도 입사한 사원의 정보를 조회하여 EMPLOYEE_2016 테이블 생성
+create table employee_2016
+as
+select *
+from employee
+where left(hire_date, 4) = '2016';
+
+show tables;
+select *
+from information_schema.tables
+where table_name = 'employee_2016';
+
+desc employee_2016; -- 💢 원본의 복제사항은 복제되지 않음!! 💢
+desc employee;
+
+-- employee_department 테이블 생성
+-- employee + department 테이블 조인, dept_id는 하나만 저장
+create table employee_department
+as
+select e.emp_id, e.emp_name, e.gender, e.hire_date, e.phone, e.email, e.salary,
+        d.dept_id, d.dept_name, d.unit_id, d.start_date
+from employee e, department d
+where e.dept_id = d.dept_id;
+
+show tables;
+select *
+from information_schema.tables
+where table_name = 'employee_department';
+
+desc employee_department;
+
+-- 테이블 구조만 복제
+create table emp
+as
+select *
+from employee
+where 1 = 0;
+
+show tables;
+desc emp;
+
+/*******************************************************************
+	데이터 생성 (Crate :: Insert)
+    형식 > INSERT INTO [테이블명] (컬럼리스트 ..) -- 컬럼리스트 생략 가능
+			VALUES (데이터1, 데이터2 ..)
+*******************************************************************/
+
+desc emp;
+insert into emp (emp_id, -- char(5)
+				emp_name, -- varchar(4)
+                eng_name, -- varchar(20)
+                gender, -- char(1)
+				hire_date, -- date
+                retire_date, -- date, null 허용
+                dept_id, 
+                phone, 
+                email, 
+                salary) 
+		value('S0001', '진진', null, 'F', curdate(), null, 'SYS', '010-0930-0208', 'jinjin@gmail.com', null);
+
+select * from emp;
+
+insert into emp (emp_name, -- char(5)
+				emp_id, -- varchar(4)
+                eng_name, -- varchar(20)
+                gender, -- char(1)
+				hire_date, -- date
+                retire_date, -- date, null 허용
+                dept_id, 
+                phone, 
+                email, 
+                salary) 
+		value('뇽나디', 'S0002', null, 'M', curdate(), null, 'SYS', '010-0930-0208', 'jinjin@gmail.com', null);
+
+select * from emp;
+
+-- 컬럼리스트 상의 순서와 입력 데이터가 정확히 매핑 되어야함
+insert into emp (emp_id, -- char(5)
+				emp_name, -- varchar(4)
+                eng_name, -- varchar(20)
+                gender, -- char(1)
+				hire_date, -- date
+                retire_date, -- date, null 허용
+                dept_id, 
+                phone, 
+                email, 
+                salary) 
+		value('S0003', '누리', null, 'F', curdate(), null, 'SYS', '010-0930-0208', 'jinjin@gmail.com', null);
+
+-- 컬럼리스트 생략 시 테이블 구조를 기준으로 입력
+desc emp;
+insert into emp  
+		value('S0004', '가나디', null, 'M', curdate(), null, 'SYS', '010-0930-0208', 'ganadi@gmail.com', null);
+
+select * from emp;
 
 
 
