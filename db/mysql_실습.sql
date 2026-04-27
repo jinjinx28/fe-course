@@ -1828,6 +1828,15 @@ insert into emp2 (ename, gender, hire_date)
 insert into emp2 (ename, gender, hire_date, salary)
 	value('두도지', 'M', now(), 3000);
     
+insert into emp2 (ename, gender)
+	value('고냐니', 'M');
+    
+insert into emp2 (ename, gender, hire_date)
+	value('곤뇽', 'M', now());
+
+insert into emp2 (ename, gender, hire_date, salary)
+	value('두도지', 'M', now(), 3000);
+    
 select * from emp2;
 
 /********************************************************************
@@ -1911,6 +1920,77 @@ select * from employee;
 
 desc copy_emp;
 select count(*) from copy_emp;
+select * from copy_emp;
+
+-- 고소해 사원의 급여를 6000으로 수정
+update copy_emp 
+	set salary = 6000
+    where emp_id = 'S0020';
+    
+select * from copy_emp where emp_id = 'S0020';
+    
+-- 안경태 사원의 입사일을 '20210705'로 수정
+select emp_id from copy_emp where emp_name = '안경태'; -- S0007
+update copy_emp
+	set hire_date = cast('20210705' as date) -- cast 함수
+    where emp_id = 'S0007';
+    
+select * from copy_emp where emp_id = 'S0007';
+desc emp;
+
+show tables;
+desc emp2;
+
+-- 1 ) emp2 테이블에 retire_date 컬럼 추가 : date, null 허용
+-- 2 ) null 데이터를 현재 날짜로 수정
+-- 3 ) retire_date를 'not null' 제약 정의
+
+select count(*) from emp2;
+select * from emp2;
+
+-- 1 )
+alter table emp2 
+	add retire_date date;
+    
+desc emp2;
+
+update emp2 
+	set retire_date = curdate();
+    
+alter table emp2
+	modify column retire_date date not null;
+    
+-- 정보시스템 부서의 모든 사원 급여를 20% 증가
+
+select * from copy_emp;
+
+update copy_emp
+	set salary =  salary + salary * 0.2
+    where dept_id = (select dept_id 
+						from department 
+                        where dept_name = '정보시스템');
+    
+select @@autocommit; -- 1 (바로 db 적용)
+
+-- 'S0003'인 강우동 사원의 영어 이름을 'kang', 입사일은 현재 날짜, 부서를 MKT로 변경
+select * from copy_emp where emp_id = 'S0003';
+
+update copy_emp 
+	set eng_name = 'kang',
+		hire_date = curdate(),
+        dept_id = 'MKT'
+	where emp_id = 'S0003';
+
+
+
+
+
+
+
+
+
+
+
 
 
 
