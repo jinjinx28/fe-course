@@ -1969,8 +1969,6 @@ update copy_emp
     where dept_id = (select dept_id 
 						from department 
                         where dept_name = '정보시스템');
-    
-select @@autocommit; -- 1 (바로 db 적용)
 
 -- 'S0003'인 강우동 사원의 영어 이름을 'kang', 입사일은 현재 날짜, 부서를 MKT로 변경
 select * from copy_emp where emp_id = 'S0003';
@@ -1981,12 +1979,51 @@ update copy_emp
         dept_id = 'MKT'
 	where emp_id = 'S0003';
 
+-- 트랜잭션별 업데이트 정의
+-- 트랜잭션 관리 명령어 DTL : commit(작업완료), rollback(작업복원)
+-- DML 명령어에 영향을 줌 / DDL은 관리방식에 상관없이 무조건 autocommit
 
+select @@autocommit; -- 현재 트랜잭션 방식 확인 (1 : 자동 트랜잭션 관리, 0 : 수동 트랜잭션 관리)
+set autocommit = 0;
 
+select * from emp;
+commit; -- 새로운 트랜잭션 시작
 
+-- 누리의 급여를 3000으로 수정
+update emp 
+	set salary = 5000	-- 물리적 DB에 반영 되기 전
+    where eid = 'S002';
 
+-- rollback; 
+commit;
 
+/***************************************************
+	데이터 삭제 : DELETE
+    형식 > DELETE FROM [테이블명]
+            WHERE [조건절]
+***************************************************/
+select @@sql_safe_updates; -- 업데이트 모드 해제
+select @@autocommit;		-- 수동으로 트랜잭션 관리
+commit;
 
+-- emp 테이블의 가나디, 누리 사원 삭제
+select * from emp;
+
+delete from emp
+	where eid in ('S003', 'S004');
+rollback;
+commit;
+
+select * from emp;
+
+-- emp 테이블의 모든 사원 삭제, truncate 명령어 사용
+truncate table emp; -- truncate : DDL 자동 커밋
+select * from emp;
+-- rollback : truncate table 명령은 DDL이므로 autocommit 됨
+commit;
+
+set autocommit = 1;
+select @@autocommit;
 
 
 
