@@ -1738,6 +1738,102 @@ insert into emp
 
 select * from emp;
 
+-- null이 허용되는 컬럼은 컬럼리스트에서 생략 가능
+insert into emp (emp_id, -- char(5)
+				emp_name, -- varchar(4)
+                gender, -- char(1)
+				hire_date, -- date
+                dept_id, 
+                phone, 
+                email) 
+		value('S0005', '누리링', 'F', curdate(), 'SYS', '010-0930-0208', 'jinjin@gmail.com');
+
+select * from emp;
+
+/*******************************************************************
+	DDL - 테이블의 데이터 절삭 (Truncate), 데이터가 영구적으로 삭제
+    형식 > TRUNCATE TABLE [테이블명];
+*******************************************************************/
+select count(*) from emp;
+select * from emp;
+
+truncate table emp;
+drop table emp;
+
+show tables;
+select * from information_schema.tables
+	where table_name = 'emp';
+
+-- emp 생성 : eid(char, 4), ename(varchar, 5), gender(char, 1), hire_date(datetime), salary(int)
+--           eid, ename, gender 컬럼은 null을 허용하지 않음 (not null)
+
+create table emp (eid char(4) not null, 
+				ename varchar(5) not null, 
+                gender char(1) not null, 
+                hire_date datetime, 
+                salary int);
+
+show tables;
+select * from information_schema.tables
+	where table_name = 'emp';
+desc emp;
+    
+insert into emp (eid, ename, gender, hire_date, salary)
+	value('S001','진진', 'F', null, null);
+    
+select * from emp;
+
+insert into emp (eid, ename, gender, hire_date, salary)
+	value('S002','뇽', 'M', null, null);
+    
+insert into emp (ename, gender, hire_date, eid)
+	value('누리', 'F', curdate(), 'S003');
+    
+insert into emp (gender, ename, eid, hire_date, salary)
+	value('M', '가나디', 'S004', now(), 1000);
+
+select * from emp;
+
+/*****************************************************************************
+	자동 번호 생성기 : auto_increment
+					- 테이블 생성 시 옵션 자리에 기술, pk 컬럼에 사용, 정수형 데이터 생성
+                    - 사용 시 반드시 primary key 제약과 함께 사용
+    형식 > CREATE TABLE [테이블명] (
+				컬럼명   데이터타입   AUTO_INCREMENT
+                
+			)
+*****************************************************************************/
+
+-- emp2 생성 : eid(int, 자동번호생성), ename(varchar, 5), gender(char, 1), hire_date(datetime), salary(int)
+--           eid, ename, gender 컬럼은 null을 허용하지 않음 (not null)
+
+create table emp2 (eid int auto_increment primary key, -- uniq + not null
+					ename varchar(5) not null,
+                    gender char(1) not null,
+                    hire_date datetime,
+                    salary int
+                    );
+                    
+show tables;
+select * from information_schema.tables
+	where table_name = 'emp2';
+desc emp2;
+                    
+insert into emp2 (ename, gender)
+	value('고냐니', 'M');
+    
+insert into emp2 (ename, gender, hire_date)
+	value('곤뇽', 'M', now());
+
+insert into emp2 (ename, gender, hire_date, salary)
+	value('두도지', 'M', now(), 3000);
+    
+select * from emp2;
+
+
+
+
+
 
 
 
