@@ -1830,11 +1830,87 @@ insert into emp2 (ename, gender, hire_date, salary)
     
 select * from emp2;
 
+/********************************************************************
+	DDL - 테이블 변경 : ALTER TABLE
+    형식 > ALTER TABLE [테이블명]
+			ADD COLUMN [NEW COLUMN, 데이터 타입] -- NULL 허용
+            MODIFY COLUMN [MODIFY COLUMN, 데이터 타입] -- 크기 고려
+            DROP COLUMN [DROP COLUMN]
+********************************************************************/
 
+show tables;
+desc emp;
 
+-- emp 테이블에 phone(char, 13, - 포함) 컬럼 추가
+alter table emp
+	add column phone char(13);
+desc emp;
+select * from emp;
 
+-- phone 컬럼의 크기를 20으로 변경, 크기를 크게 변경하는 경우 정상 실행
+alter table emp 
+	modify column phone char(20);
+desc emp;
 
+-- ename 컬럼에 데이터가 존재하는 경우
+-- ename 컬럼의 크기를 varchar(2)로 변경, 크기를 작게 변경하는 경우 데이터 유실이 발생하므로 에러 발생
 
+-- ename 컬럼의 크기를 varchar(10)으로 변경 => 크게 변경은 정상 실행
+select * from emp;
+
+alter table emp
+	modify column ename varchar(10) not null;
+
+desc emp;
+
+/***************************************************
+	데이터 수정 : UPDATE
+    형식 > UPDATE [테이블명]
+			SET [컬럼명 = NEW 데이터, ..]
+            WHERE [조건절]
+	➰ MySQL은 UPDATE 권한 변경 후 진행 ➰
+    => SET SQL_SAFE_UPDATES = 0 (허용) / 1 (불가)
+***************************************************/
+
+select * from emp;
+-- S001 사번의 폰번호 업뎃, 업데이트 모드 허용으로 수정
+
+set sql_safe_updates = 0;
+update emp
+	set phone = '010-0208-0930'
+    where eid = 'S001';
+
+-- 모든 사원의 폰 번호를 '010 - 2222- 8888'로 수정
+update emp
+	set phone = '010-2222-8888';
+select * from emp;
+desc emp;
+
+-- phone 컬럼에 not null 제약 추가
+alter table emp
+	modify phone char(20) not null;
+desc emp;
+
+-- emp 테이블에email 컬럼 추가 후 not null 제약 정의
+-- 1 ) 컬럼 추가 시 null 허용
+-- 2 ) update 명령으로 기존 데이터 추가
+-- 3 ) not null 제약 정의 
+alter table emp add email varchar(20);
+desc emp;
+select * from emp;
+update emp set email = 'jinjin@gmail.com';
+alter table emp modify email varchar(20) not null;
+desc emp;
+
+-- employee 테이블을 복제하여 copy_emp 테이블 생성
+show tables;
+
+create table copy_emp 
+as
+select * from employee;
+
+desc copy_emp;
+select count(*) from copy_emp;
 
 
 
