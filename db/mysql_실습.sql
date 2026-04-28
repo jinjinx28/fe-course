@@ -2250,6 +2250,73 @@ alter table emp2_const
 select * from information_schema.table_constraints
 	where table_name = 'emp2_const';
 
+desc emp2_const;
+select * from emp2_const;
+
+insert into emp2_const(emp_id,emp_name, did)
+	values('S001', '진진', 'SYS');
+
+insert into emp2_const(emp_id,emp_name, did)
+	values('S002', '뇽', 'ACC');
+
+select * from department2;
+select * from emp2_const;
+
+-- department2 테이블의 SYS 부서 삭제한다면 => emp2_const에서 참조하므로, 삭제 불가
+-- (1) emp2_const 테이블의 sys 참조 행을 삭제
+-- (2) department2 테이블의 sys 데이터 삭제 기능
+
+-- (1) 
+delete from emp2_const where did = 'sys';
+select * from emp2_const;
+
+-- (2)
+delete from department2 where dept_id = 'sys';
+select *from department2;
+
+-- 참조하는 부모 테이블의 컬럼이 변화함에 따라 자식도 함께 적용받도록 옵션 정의
+-- ON ~ [DELETE, IUPDATE]CASVADE; 참조키 제약 정의 시 마지막이 추가
+select * from information_schema.table_constraints
+	where tabel_name = 'emp2_count';
+    
+-- emp2_const 테이브의 참조키 제약 삭제
+alter table emp2_const
+	drop constraint fk_emp2_const_did;
+
+desc emp2_const;
+
+-- epm2_const 테이블의 참조키 제약 정의, on delete/update cascade 추가
+alter table emp2_const
+	add constraint fk_emp2_const_did foreign key(did)
+		references department2(dept_id)
+			on delete cascade
+            on update cascade;
+            
+desc emp2_const;
+select * from information_schema.key_column_usage
+	where table_name = 'emp2_const';
+    
+select * from emp2_const;
+
+-- department2의 ACC 부서를 ABC로 수정
+update department2
+	set dept_id = 'ABC'
+	where dept_id = 'ACC';
+
+select * from department2;
+select * from emp2_const;
+
+-- department2의 'ABC' 부서를 삭제
+delete from department2 where dept_id = 'ABC';
+
+
+
+
+
+
+
+
+
 
 
 
