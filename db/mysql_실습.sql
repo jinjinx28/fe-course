@@ -2178,13 +2178,77 @@ alter table emp3_const
     
 select * from information_schema.table_constraints
 	where table_name = 'emp3_const';
+    
+select * from emp3_const;
+insert into emp3_const (emp_id, emp_name, salary)
+	values('S001', '진진', 4000);
 
+-- emp3_const 테이블에 emp_name 컬럼에 unique 제약 추가
+select * from information_schema.table_constraints
+	where table_name = 'emp3_const';
 
+select * from information_schema.key_column_usage
+	where table_name = 'emp3_const';
+    
+alter table emp3_const 
+	add constraint un_emp3_const_emp_name unique(emp_name);
 
+select * from emp3_const;
+insert into emp3_const 
+	values('S002', '뉴뉴', curdate(), 3000);
+    
+desc emp2_const;
+select * from emp2_const;
 
+-- emp2_const 데이터 삭제
+delete from emp2_const;
 
+-- emp_id 기본키 제약 추가
+alter table emp2_const
+	add constraint pk_emp2_const_emp_id primary key(emp_id);
 
+desc emp2_const;
+select * from information_schema.table_constraints
+	where table_name = 'emp2_const';
+    
+select * from emp2_const;
 
+-- dept_id 컬럼 추가 char(3), not null 제약 추가
+alter table emp2_const
+	add dept_id char(3) not null;
+
+-- department를 복제하여 department2 테이블 생성
+
+create table department2
+as
+select * from department;
+
+desc department;
+desc department2;
+select * from department2;
+
+-- dept_id 컬럼에 기본키 제약 추가
+alter table department2
+	add constraint pk_department2_dept_id primary key(dept_id);
+    
+select * from information_schema.key_column_usage
+	where table_name = 'department2';
+    
+-- emp2_const 테이블의 dept_id 컬럼 참조 제약 추가 => department2의 dept_id
+desc emp2_const; 	-- did
+desc department2;	-- dept_id
+
+-- 컬럼명 변경
+alter table emp2_const
+	rename column dept_id to did;
+
+-- emp2_const의 did(부서아이디) 컬럼에 참조키 제약 추가
+alter table emp2_const
+	add constraint fk_emp2_const_did foreign key(did)
+		references department2(dept_id);
+
+select * from information_schema.table_constraints
+	where table_name = 'emp2_const';
 
 
 
