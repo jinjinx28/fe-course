@@ -2025,6 +2025,88 @@ commit;
 set autocommit = 1;
 select @@autocommit;
 
+/*********************************************************************
+	제약사항(Constraints) : 데이터 무결성 원칙을 적용하기 위한 규칙 
+    
+    - Unique 제약사항 : 중복을 방지하는 제약
+    - Not null 제약사항 : null 값을 허용하지 않는 제약
+    - Primary 제약사항 : Unique + Not null, Auto-icrement 함께 사용
+    - Foreign 제약사항 : 타 테이블의 기본키를 참조하는 제약, 
+						기본키와 참조하는 컬럼은 데이터 타입이 동일해야함
+	- Default 제약사항 : 데이터 입력 시 기본으로 저장되는 데이터를 정의하는 제약
+    
+    ** 제약사항은 테이블 생성 시, 테이블 수정 시 정의할 수 있음
+*********************************************************************/
+
+use hrdb2019;
+select database();
+select @@sql_safe_updates; -- 업데이트 모드 확인
+select @@autocommit;		-- 트랜잭션 방식 확인
+set sql_safe_updates = 0;
+
+-- 제약사항 확인 
+show tables;
+desc employee;
+select  * from information_schema.table_constraints
+	where table_schema = 'hrdb2019';
+
+-- emp_const 테이블 생성, 기본키 제약(primary), 참조키(foreign), not null
+create table emp_const(
+	emp_id char(4) primary key,
+    emp_name varchar(5) not null,
+    hire_date date,
+    salary int
+);
+
+show tables;
+select * from information_schema.tables
+-- 	where table_name = 'emp_const';
+    where table_name like 'emp%';
+desc emp_const;
+desc emp2_const;
+
+create table emp2_const(
+	emp_id char(4),
+    emp_name varchar(5) not null,
+    hire_date date,
+    salary int
+);
+
+-- 데이터 insert 작업 시 제약사항 체크함
+insert into emp_const(emp_id, emp_name, hire_date, salary)
+	values('S001', '진진', curdate(), 5000);
+    
+insert into emp2_const(emp_id, emp_name, hire_date, salary)
+	values('S002', '뇽뇽', curdate(), 5000);
+
+insert into emp_const(emp_id, emp_name)
+	values('S002', '누리');
+    
+insert into emp2_const(emp_id, emp_name)
+	values('S002', '누리');
+
+select * from emp_const;
+select * from emp2_const;
+
+
+create table emp3_const(
+	emp_id char(4),
+    emp_name varchar(5) not null,
+    hire_date date,
+    salary int,
+    -- constraint 제약사항명 제약사항(컬럼)
+    constraint pk_emp3_const_emp_id primary key (emp_id)
+);
+desc emp3_const;
+select * from information_schema.table_constraints
+	where table_name = 'emp3_const';
+    
+select * from information_schema.table_constraints
+	where table_schema = 'hrdb2019';
+
+
+
+
 
 
 
