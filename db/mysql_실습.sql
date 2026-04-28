@@ -2104,6 +2104,84 @@ select * from information_schema.table_constraints
 select * from information_schema.table_constraints
 	where table_schema = 'hrdb2019';
 
+/*********************************************************************
+	제약사항 추가 / 수정 / 삭제
+    형식 > ALTER TABLE [테이블명]
+			ADD CONSTRAINT [제약사항명] 제약사항(컬럼)
+            MODIFY CONSTRAINT [제약사항명] 제약사항(컬럼)
+            DROP [제약사항명]
+            
+		💫 제약사항은 삭제 후 재정의하는 것을 원칙으로 함 !! 💫
+*********************************************************************/
+
+-- emp_const 테이블의 제약사항 확인
+select * from information_schema.table_constraints
+	where table_name = 'emp_const';
+desc emp_const;
+
+-- emp_const 테이블에 phone 컬럼 추가, char(13) 
+select * from emp_const;
+
+alter table emp_const
+	add phone char(13);
+desc emp_const;
+
+-- phone 컬럼에 '010-0208-0930' tnwjd
+select @@sql_safe_updates;
+update emp_const set phone = '010-0208-0930';
+select * from emp_const;
+
+-- phone 컬럼에 default 제약 사항 추가
+alter table emp_const
+	modify phone char(13) default '010-0208-0930';
+
+desc emp_const; -- not null, default 제약 확인
+select * from information_schema.table_constraints
+	where table_name = 'emp_const'; -- pk, fk 확인
+
+insert into emp_const(emp_id, emp_name, hire_date)
+	values('S003', '가나디', now());
+    
+
+-- salary 컬럼에 default 제약 추가 (기본 1000)
+alter table emp_const
+	modify salary int default '1000';
+desc emp_const;
+
+-- hire_date 컬럼에 default 제약 추가 curdate() 함수 사용 불가, '년-월-일'
+alter table emp_const
+	modify hire_date date default '2026-01-01';
+desc emp_const;
+
+insert into emp_const(emp_id, emp_name) values ('S004', '뇽');
+select * from emp_const;
+
+-- check 제약 : mysql 8.0 (+) 
+desc emp_const;
+desc emp3_const;
+
+-- emp3_const 테이블의 hire_date 컬럼은 default 제약 추가, '2026-03-01'
+-- salary 컬럼은 not null 제약 변경
+select * from emp3_const;
+
+alter table emp3_const 
+	modify hire_date date default '2026-03-01';
+    
+alter table emp3_const
+	modify salary int not null;
+    
+desc emp3_const;
+
+-- salary 값 입력 시 '3000' 이상인 값만 저장되도록 check 제약사항 추가
+alter table emp3_const
+	add constraint chk_emp3_const_salary check (salary >= 3000);
+    
+select * from information_schema.table_constraints
+	where table_name = 'emp3_const';
+
+
+
+
 
 
 
