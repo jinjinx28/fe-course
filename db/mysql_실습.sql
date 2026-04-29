@@ -2354,24 +2354,34 @@ select rank() over(order by hire_date asc) as 입사일순서,
 from employee;
 
 
-/********************************************************************
-	트리거 생성 : 테이블의 pk 정의 :: '문자' + '000' + 1(auto_increment)
-********************************************************************/
 
+/**************************************************************
+	트리거 생성 : 테이블의 pk 정의 :: '문자'+ '000' + 1(auto_increment)
+***************************************************************/
 -- trigger 생성 : 여러개의 sql문 포함
+/************************************************
+delimiter $$
+create trigger [트리거명]
+before insert on [테이블명]
+for each row
+begin
+declare max_code int;  --  'M0001'
 
--- delimiter $$
--- create trigger [트리거명]
--- before insert on [테이블명]
--- for each row
--- begin
--- declare max_code int;  --  'M0001'
+-- 현재 저장된 값 중 가장 큰 값을 가져옴
+SELECT IFNULL(MAX(CAST(right([기본키 컬럼명], 4) AS UNSIGNED)), 0)
+INTO max_code
+FROM [테이블명]; 
 
+-- 'M0001' 형식으로 아이디 생성, LPAD(값, 크기, 채워지는 문자형식) : M0001
+SET NEW.[기본키 컬럼명] = concat('M', LPAD((max_code+1), 4, '0')); 
 
+end $$
+delimiter ;
+************************************************/
 
 show tables;
 create table member(
-	mid char(5) primary key, -- 'M0001'
+	mid  char(5)	primary key,  -- 'M0001'
     name varchar(5) not null,
     mdate datetime
 );
@@ -2380,37 +2390,35 @@ select * from information_schema.triggers
 	where trigger_schema = 'hrdb2019';
 
 /************************************************
-	mid에 들어가는 'M0001' 타입의 회원 아이디 트리거
-***********************************************/
+	mid에 들어가는 'M0001' 타입의 회원아이디 트리거
+/************************************************/
+delimiter $$
+
+drop trigger if exists trg_member_mid;
+
 delimiter $$
 create trigger trg_member_mid
 before insert on member
 for each row
 begin
-declare max_code int;  --  'M0001'
+    declare max_code int;
 
 -- 현재 저장된 값 중 가장 큰 값을 가져옴
-SELECT IFNULL(MAX(CAST(right(mid, 4) AS UNSIGNED)), 0)
-INTO max_code
-FROM [테이블명]; 
+select ifnull(max(cast(right(mid, 4) as unsigned)), 0)
+    into max_code
+    from member;
 
 -- 'M0001' 형식으로 아이디 생성, LPAD(값, 크기, 채워지는 문자형식) : M0001
-SET NEW.mid = concat('M', LPAD((max_code+1), 4, '0'));
+set new.mid = concat('m', lpad((max_code + 1), 4, '0')); 
 
 end $$
 delimiter ;
+/************************************************/
 
+desc member;
+insert into member(name, date) values ('뉴뉴', now());
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+select * from member;
+            
+            
+            
