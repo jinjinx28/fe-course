@@ -2325,3 +2325,5 @@ delete from department2 where dept_id = 'ABC';
 
 
 
+
+
