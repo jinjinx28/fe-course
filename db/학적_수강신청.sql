@@ -243,7 +243,34 @@ from instructor i inner join subject s on i.instructor_no = s.instructor_no
 					inner join class_time c on s.subject_no = c.subject_no
 where c.class_time = '120분';
 
+-- 120분 강의하는 강사 정보, 과목명 조회 => 서브쿼리 사용 과목명 - 스칼라 서브쿼리
+select ( select s.subject_name
+			from subject s
+            where s.subject_no = c.subject_no) as subject_name, i.instructor_name, c.class_time
+from instructor i inner join subject s on i.instructor_no = s.instructor_no
+					inner join class_time c on s.subject_no = c.subject_no
+where c.class_time = '120분';
 
+-- 뇽 강사가 강의하는 모든 과목 조회
+select i.instructor_name as '강사', s.subject_name as '강의명'
+from class_time c inner join subject s on c.subject_no = s.subject_no
+					inner join instructor i on i.instructor_no = s.instructor_no
+where instructor_name = '뇽';
+
+-- 고냐니 강사가 강의하는 과목과 과목을 수강한 학생 정보와 성적을 조회
+select i.instructor_name as '강사', 
+		su.subject_name as '강의명',  
+        st.student_name as '학생', 
+        e.grade as '성적'
+from instructor i inner join subject su on i.instructor_no = su.instructor_no
+					inner join enrollment e on su.subject_no = e.subject_no
+                    inner join student st on e.student_id = st.student_id
+where i.instructor_name = '고냐니';
+
+-- 모든 강사가 강의하는 과목과 성적 조회 (모든 강사 포함)
+select i.instructor_name as '강사', su.subject_name as '강의명', e.grade as '성적'
+from instructor i left join subject su on i.instructor_no = su.instructor_no
+					left join enrollment e on su.subject_no = e.subject_no
 
 
 
