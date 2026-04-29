@@ -102,6 +102,9 @@ alter table subject
 alter table subject
 	modify instructor_no int not null;
 
+alter table subject
+	modify subject_no int not null;
+
 alter table class_time 
 	modify time_id int auto_increment;
 
@@ -112,7 +115,7 @@ alter table enrollment
 	modify student_id int not null;
     
 alter table enrollment
-	modify subject_no int not null;
+	modify grade char not null;
 
 set foreign_key_checks = 1;
 
@@ -157,16 +160,88 @@ insert into student(student_name)
 insert into student(student_name)
 	values('흠냐링');
 
+-- 과목 테이블 데이터 입력
 
+desc subject;
+select * from subject;
 
+insert into subject (subject_name, class_room, instructor_no)
+	values('수면의 중요성', '208호', '1');
+    
+insert into subject (subject_name, class_room, instructor_no)
+	values('가챠와 일러의 중요성', '930호', '2');
+    
+insert into subject (subject_name, class_room, instructor_no)
+	values('골골송 부르는 법', '210호', '3');
+    
+insert into subject (subject_name, class_room, instructor_no)
+	values('듀듀듀듀듀', '030호', '4');
+    
+insert into subject (subject_name, class_room, instructor_no)
+	values('냐냐뇽', '293', '5');
 
+-- 강의 시간 데이터 테이블 입력
+desc class_time;
+select * from subject;
 
+insert into class_time (class_time, subject_no)
+	values('120분', 1);
+    
+insert into class_time (class_time, subject_no)
+	values('80분', 2);
+    
+insert into class_time (class_time, subject_no)
+	values('160분', 3);
+    
+insert into class_time (class_time, subject_no)
+	values('60분', 4);
+    
+insert into class_time (class_time, subject_no)
+	values('3분', 5);
 
+-- 등록 테이블 데이터 입력
 
+desc enrollment;
+select * from enrollment;
 
+insert into enrollment (student_id, subject_no, grade) values (1, 1 ,'A');
+insert into enrollment (student_id, subject_no, grade) values (2, 2 ,'C');
+insert into enrollment (student_id, subject_no, grade) values (3, 3 ,'B');
+insert into enrollment (student_id, subject_no, grade) values (4, 4 ,'F');
+insert into enrollment (student_id, subject_no, grade) values (5, 5 ,'A');
 
+-- A학점을 받은 학생의 정보를 조회
+-- select *
+-- from enrollment
+-- where grade = 'A';
 
+select s.student_name as '학생명',
+		s.address as '주소',
+        e.grade as '학점'
+from student s inner join enrollment e
+				on s.student_id = e.student_id
+where e.grade = 'A';
 
+-- C학점을 받은 학생의 정보와 과목명을 조회
+select s.student_name as '학생명',
+		s.address as '주소',
+        e.grade as '학점',
+        sub.subject_name as '과목명'
+from student s inner join enrollment e on s.student_id = e.student_id
+				inner join subject sub on sub.subject_no = e.subject_no
+where e.grade = 'C';
+
+select st.student_name, st.address, su.subject_name, su.class_room, e.grade
+from student st, subject su, enrollment e
+where st.student_id = e.student_id
+	and su.subject_no = e.subject_no
+    and e.grade = 'C';
+
+-- 120분 강의하는 과목 정보와 강사 정보를 조회
+select s.subject_name, i.instructor_name, c.class_time
+from instructor i inner join subject s on i.instructor_no = s.instructor_no
+					inner join class_time c on s.subject_no = c.subject_no
+where c.class_time = '120분';
 
 
 
