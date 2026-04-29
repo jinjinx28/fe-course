@@ -2309,9 +2309,96 @@ select * from emp2_const;
 -- department2의 'ABC' 부서를 삭제
 delete from department2 where dept_id = 'ABC';
 
+/***************************************
+	행 번호 : row_number() as '별칭'
+***************************************/
+
+use hrdb2019;
+select database();
+
+-- 정보시스템 부서의 사원들 연봉이 높은 순으로 사번, 사원명, 급여 조회
+select row_number() over(order by salary desc) as rno,
+		emp_id, 
+        emp_name,
+        salary
+from employee 
+where dept_id = 'SYS';
+
+-- 휴가를 많이 사용한 사원순으로 조회, 행번호, 사원명, 휴가 일수 (총합)
+select row_number() over(order by sum(duration) desc) as rno, 
+		e.emp_id, 
+        e.emp_name, 
+        sum(v.duration)
+from employee e, vacation v
+where e.emp_id = v.emp_id
+group by v.emp_id;
+
+/***************************************
+	석차 : rank() over() as '별칭'
+***************************************/
+
+-- 사원의 급여가 높은 순으로 정렬
+select rank() over(order by salary desc) as 순위, 
+		emp_id,
+		emp_name,
+        salary
+from employee
+order by salary desc;
+
+-- 입사일이 빠른 순서대로 정렬
+select rank() over(order by hire_date asc) as 입사일순서,
+	emp_id,
+    emp_name, 
+    salary, 
+    hire_date
+from employee;
+
+
+/********************************************************************
+	트리거 생성 : 테이블의 pk 정의 :: '문자' + '000' + 1(auto_increment)
+********************************************************************/
+
+-- trigger 생성 : 여러개의 sql문 포함
+
+-- delimiter $$
+-- create trigger [트리거명]
+-- before insert on [테이블명]
+-- for each row
+-- begin
+-- declare max_code int;  --  'M0001'
 
 
 
+show tables;
+create table member(
+	mid char(5) primary key, -- 'M0001'
+    name varchar(5) not null,
+    mdate datetime
+);
+desc member;
+select * from information_schema.triggers
+	where trigger_schema = 'hrdb2019';
+
+/************************************************
+	mid에 들어가는 'M0001' 타입의 회원 아이디 트리거
+***********************************************/
+delimiter $$
+create trigger trg_member_mid
+before insert on member
+for each row
+begin
+declare max_code int;  --  'M0001'
+
+-- 현재 저장된 값 중 가장 큰 값을 가져옴
+SELECT IFNULL(MAX(CAST(right(mid, 4) AS UNSIGNED)), 0)
+INTO max_code
+FROM [테이블명]; 
+
+-- 'M0001' 형식으로 아이디 생성, LPAD(값, 크기, 채워지는 문자형식) : M0001
+SET NEW.mid = concat('M', LPAD((max_code+1), 4, '0'));
+
+end $$
+delimiter ;
 
 
 
